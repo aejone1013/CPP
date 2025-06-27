@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 15:06:35 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/11/27 15:08:45 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/05/27 15:06:00 by jaoh              #+#    #+#             */
+/*   Updated: 2025/06/27 15:08:34 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,13 @@
 
 #define LIMIT_MIN -50000
 #define LIMIT_MAX 50000
-#define	NC "\e[0m"
-#define RED "\e[31m"
-#define GREEN "\e[32m"
-#define YELLOW "\e[33m"
-#define BLUE "\e[34m"
-#define PURPLE "\e[35m"
-#define CYAN "\e[36m"
 
 Zombie *zombieHorde( int N, std::string name );
-
-std::string	colorZombieName( std::string const color, std::string const name )
-{
-	std::string	colorName( name );
-
-	colorName.insert( 0, color );
-	colorName.append( NC );
-	return ( colorName );
-}
 
 int	getNbZombies( void )
 {
 	int	nb;
 
-	std::cout << "Dear necromancer! How many zombies should we raise for our horde today?" << std::endl << "> ";
 	while (!( std::cin >> nb) || nb > LIMIT_MAX || nb < LIMIT_MIN ) {
 		if (std::cin.eof())
 			return ( 0 );
@@ -72,19 +55,15 @@ int	main( void )
 	
 	nb = getNbZombies();
 	name = getHordeName();
-	
-	std::cout << GREEN << "Attempting to raise the horde \'" << name << "\', of " << nb << " zombies..." << NC << std::endl;
-	std::cout << GREEN << "Allocating space for zombies..." << NC << std::endl;
-	Zombie	*horde = zombieHorde(nb, colorZombieName( RED, name ));
+
+	Zombie	*horde = zombieHorde(nb, name);
 	if ( horde == NULL )
 	{
 		std::cout << "Your necromancy failed. These corpses will not rise." << std::endl;
 		return ( 1 );
 	}
-	std::cout << GREEN << "Mwahaha we have zombies...!" << NC << std::endl;
 	for ( int i = 0; i < nb; i++ )
 		horde[i].announce();
-	std::cout << GREEN << "Returning zombies to their graves..." << NC << std::endl;
 	delete [] horde;
 	return ( 0 );
 }
