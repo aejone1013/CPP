@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contact.class.cpp                                  :+:      :+:    :+:   */
+/*   contact.class.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:16:25 by jaoh              #+#    #+#             */
-/*   Updated: 2025/06/27 13:38:56 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/06/27 15:45:03 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Contact.class.hpp"
+#include "contact.class.hpp"
 
 /*	Constructor	*/
 Contact::Contact(void) : _firstname(""),
@@ -54,7 +54,7 @@ bool	Contact::setFirstname(std::string str) {
 		return (false);
 	}
 	else if (!_containsOnlyAlpha(str)) {
-		std::cout << "Error: Names can only contain letters, spaces and hyphens." << std::endl;
+		std::cout << "Error: Name can only contain letters, spaces and hyphens." << std::endl;
 		return (false);
 	}
 	str[0] = std::toupper(str[0]);
@@ -67,7 +67,7 @@ bool	Contact::setLastname(std::string str) {
 		return (false);
 	}
 	else if (!_containsOnlyAlpha(str)) {
-		std::cout << "Error: Names can only contain letters, spaces and hyphens." << std::endl;
+		std::cout << "Error: Name can only contain letters, spaces and hyphens." << std::endl;
 		return (false);
 	}
 	for (std::string::iterator it = str.begin(); it != str.end(); it++) {
@@ -82,7 +82,7 @@ bool	Contact::setNickname(std::string str) {
 		return (false);
 	}
 	else if (!_containsOnlyAlpha(str)) {
-		std::cout << "Error: Names can only contain letters, spaces and hyphens." << std::endl;
+		std::cout << "Error: Name can only contain letters, spaces and hyphens." << std::endl;
 		return (false);
 	}
 	str[0] = std::toupper(str[0]);
@@ -95,7 +95,7 @@ bool	Contact::setNumber(std::string const str) {
 		return (false);
 	}
 	else if (!_containsOnlyDigits(str)) {
-		std::cout << "Error: Phone numbers can only contain digits, spaces and hyphens." << std::endl;
+		std::cout << "Error: Phone number can only contain digits, spaces and hyphens." << std::endl;
 		return (false);
 	}
 	this->_number = str;
@@ -143,10 +143,11 @@ bool	Contact::isEmpty(void) const {
 bool	Contact::displayContactInfo(void) const {
 	if (this->isEmpty())
 		return (false);
-	std::cout	<< "+ First name\t: "	<< this->getFirstname()	<< std::endl
-				<< "+ Last name\t: "	<< this->getLastname()	<< std::endl
-				<< "+ Nickname\t: "		<< this->getNickname()	<< std::endl
-				<< "+ Phone number\t: "	<< this->getNumber() 	<< std::endl
-				<< "+ Darkest secret: "	<< this->getSecret()	<< std::endl;
+	std::cout	<< std::endl
+				<< "- First name\t: "	<< this->getFirstname()	<< std::endl
+				<< "- Last name\t: "	<< this->getLastname()	<< std::endl
+				<< "- Nickname\t: "		<< this->getNickname()	<< std::endl
+				<< "- Phone number\t: "	<< this->getNumber() 	<< std::endl
+				<< "- Darkest secret: "	<< this->getSecret()	<< std::endl;
 	return (true);
 }
