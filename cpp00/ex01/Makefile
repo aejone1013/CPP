@@ -6,11 +6,11 @@
 #    By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/11 16:16:08 by jaoh              #+#    #+#              #
-#    Updated: 2025/05/18 16:16:11 by jaoh             ###   ########.fr        #
+#    Updated: 2025/06/27 13:40:03 by jaoh             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= FMN-PhoneBook
+NAME	= PhoneBook
 
 CC		= g++
 CFLAGS	= -Werror -Wextra -Wall -std=c++98

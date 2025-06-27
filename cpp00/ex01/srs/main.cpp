@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 16:16:33 by jaoh              #+#    #+#             */
-/*   Updated: 2025/05/18 16:16:36 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/06/27 13:51:00 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ int	main(void) {
 	PhoneBook	book;
 	std::string	userInput;
 
-	std::cout << std::endl << "Welcome to the 1981 Forget-Me-Not(TM) PhoneBook(c)!" << std::endl;
 	while (true) {
 		std::cout 	<< std::endl
-					<< "+---------------- Main Menu ----------------+" << std::endl
+					<< "Please enter one of the following:" << std::endl
 					<< std::endl
-					<< "What would you like to do?" << std::endl << "> ";
+					<< "\tADD\t: add a contact" << std::endl
+					<< "\tSEARCH\t: search contact list" << std::endl
+					<< "\tEXIT\t: exit" << std::endl << "> ";
 		userInput = getInput(&book);
 		if (userInput == "EXIT")
 			break ;
@@ -48,13 +49,8 @@ int	main(void) {
 			if (!book.searchContact())
 				break ;
 		}
-		else {
-			std::cout	<< "Please enter one of the following:" << std::endl
-						<< "\tADD\t: add a contact" << std::endl
-						<< "\tSEARCH\t: search contact list" << std::endl
-						<< "\tEXIT\t: exit the FMN(TM) PhoneBook(c)" << std::endl;
-		}
+		else
+			std::cout	<< std::endl << "Wrong input!!!!" << std::endl;
 	}
-	std::cout << "Thank you for using the Forget-Me-Not(TM) PhoneBook(c). Come again soon!" << std::endl;
 	return (0);
 }
