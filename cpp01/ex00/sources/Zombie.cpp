@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 17:01:40 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/11/27 15:09:21 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/05/27 14:47:38 by jaoh              #+#    #+#             */
+/*   Updated: 2025/06/27 15:02:33 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 #include <string>
 #include "Zombie.hpp"
 
-/******************************************************************************/
-/*						CONSTRUCTORS & DESTRUCTORS							  */
-/******************************************************************************/
-
+/* constructors */
 Zombie::Zombie( void )
 {
 	std::cout << "A zombie appeared!" << std::endl;
@@ -26,31 +23,23 @@ Zombie::Zombie( void )
 
 Zombie::Zombie( std::string name ) : _name(name)
 {
-	std::cout << "A zombie named " << this->_getName() << " appeared!" << std::endl;
+	std::cout << "--" << this->_getName() << " appeared--" << std::endl;
 	return ;
 }
-
+/* destructor */
 Zombie::~Zombie( void )
 {
-	std::cout << this->_getName()
-			<< ": Uuuggghhhhuuhhh... nooo braiiiinz... deaaad agaiiiiiin...."
-			<< std::endl;
+	std::cout << "--" << this->_getName() << " dead--" << std::endl;
 	return ;
 }
 
-/******************************************************************************/
-/*								GETTERS										  */
-/******************************************************************************/
-
+/* getter */
 std::string Zombie::_getName( void ) const
 {
 	return ( this->_name );
 }
 
-/******************************************************************************/
-/*							PUBLIC FUNCTIONS								  */
-/******************************************************************************/
-
+/* public */
 void	Zombie::announce( void )
 {
 	std::cout << this->_getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;

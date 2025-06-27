@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/13 17:03:04 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/11/27 15:09:28 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/05/27 14:47:28 by jaoh              #+#    #+#             */
+/*   Updated: 2025/06/27 15:00:45 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	randomChump( std::string name )
 {
-	Zombie chump = Zombie( name );
+	Zombie chump = Zombie(name);
 
 	chump.announce();
 	return ;
