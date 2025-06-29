@@ -6,23 +6,18 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:39:19 by jaoh              #+#    #+#             */
-/*   Updated: 2025/06/27 15:01:13 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/06/29 15:16:06 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
 #include "Zombie.hpp"
 
-Zombie	*newZombie( std::string name );
-void	randomChump( std::string name );
+int main() {
+    Zombie *z1 = newZombie("HeapZombie");
+    z1->announce();
+    delete z1;
 
-int	main(void) {
-	Zombie	*aZombie = newZombie("Zom");
+    randomChump("StackZombie");
 
-	randomChump("Bie");
-
-	aZombie->announce();
-	delete aZombie;
-	return ( 0 );
+    return 0;
 }
