@@ -1,4 +1,4 @@
-NAME	= moarbrainzz
+NAME	= zombie
 
 CC		= c++
 CFLAGS	= -Werror -Wextra -Wall -std=c++98
@@ -6,13 +6,13 @@ CFLAGS	= -Werror -Wextra -Wall -std=c++98
 INC_PATH	= ./includes/
 INC			= -I $(INC_PATH)
 
-SRC_PATH	= ./sources/
+SRC_PATH	= ./srcs/
 SRC			=	Zombie.cpp \
 				zombieHorde.cpp \
 				main.cpp			
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
-OBJ_PATH	= ./objects/
+OBJ_PATH	= ./objs/
 OBJS		= $(addprefix $(OBJ_PATH), $(SRC:.cpp=.o))
 
 all: $(OBJ_PATH) $(NAME)
