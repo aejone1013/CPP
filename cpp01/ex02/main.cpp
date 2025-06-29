@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 13:14:47 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/11/27 15:12:27 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/05/29 18:20:04 by jaoh              #+#    #+#             */
+/*   Updated: 2025/06/29 18:23:18 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,17 @@
 
 int	main( void )
 {
-	std::string	const	str = "HI THIS IS BRAIN";
-	std::string	const	*stringPTR = &str;
-	std::string	const	&stringREF = str;
+	std::string	str = "HI THIS IS BRAIN";
+	std::string *stringPTR = &str;
+	std::string &stringREF = str;
 
-	std::cout << "---- Memory addresses:\n"
-				<< "Address of string:\t\t" << &str << "\n"
-				<< "Address held by stringPTR:\t" << stringPTR << "\n"
-				<< "Address held by stringREF:\t" << &stringREF << std::endl;
+	std::cout << "str: " << &str << std::endl;
+	std::cout << "stringPTR: " << stringPTR << std::endl;
+	std::cout << "stringREF: " << &stringREF << std::endl;
 
-	std::cout << "\n---- Values:\n"
-				<< "Value of string:\t\t[" << str << "]\n"
-				<< "Value pointed to by stringPTR:\t[" << *stringPTR << "]\n"
-				<< "Value pointed to by stringREF:\t[" << stringREF << "]" << std::endl;
-	return ( 0 );
+	std::cout << "------------------------------" << std::endl;
+
+	std::cout << "str: " << str << std::endl;
+	std::cout << "stringPTR: " << *stringPTR << std::endl;
+	std::cout << "stringREF: " << stringREF << std::endl;
 }
