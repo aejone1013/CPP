@@ -1,4 +1,4 @@
-NAME	= Brainzz
+NAME	= zombie
 
 CC		= c++
 CFLAGS	= -Werror -Wextra -Wall -std=c++98
@@ -6,7 +6,7 @@ CFLAGS	= -Werror -Wextra -Wall -std=c++98
 INC_PATH	= ./includes/
 INC			= -I $(INC_PATH)
 
-SRC_PATH	= ./sources/
+SRC_PATH	= ./srcs/
 SRC			=	Zombie.cpp \
 				newZombie.cpp \
 				randomChump.cpp	\
