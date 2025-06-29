@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:39:19 by jaoh              #+#    #+#             */
-/*   Updated: 2025/06/29 15:49:45 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/06/29 17:49:57 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 #include <string>
 #include "Zombie.hpp"
 
-Zombie	*newZombie( std::string name );
-void	randomChump( std::string name );
+Zombie	*newZombie(std::string name);
+void	randomChump(std::string name) ;
 
 int	main() {
-	Zombie	*aZombie = newZombie("Heap");
+	Zombie	*a = newZombie("Hel");
 	
-	aZombie->announce();
-	delete aZombie;
-
-	randomChump("Stack");
-
-	return (0);
+	a->announce();
+	delete a;
+	randomChump("Lo");
+	Zombie	*b = newZombie("World");
+	b->announce();
+	delete b;
 }

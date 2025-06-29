@@ -6,13 +6,13 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:47:28 by jaoh              #+#    #+#             */
-/*   Updated: 2025/06/29 15:15:31 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/06/29 17:49:10 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-void	randomChump( std::string name )
+void	randomChump(std::string name)
 {
 	Zombie zombie(name);
 

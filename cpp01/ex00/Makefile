@@ -13,7 +13,7 @@ SRC			=	Zombie.cpp \
 				main.cpp			
 SRCS		= $(addprefix $(SRC_PATH), $(SRC))
 
-OBJ_PATH	= ./objects/
+OBJ_PATH	= ./objs/
 OBJ			= $(SRC:.cpp=.o)
 OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 
