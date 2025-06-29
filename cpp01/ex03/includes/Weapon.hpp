@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 14:33:21 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/11/27 15:13:34 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/05/29 18:29:28 by jaoh              #+#    #+#             */
+/*   Updated: 2025/06/29 18:38:16 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WEAPON_CLASS_H
-# define WEAPON_CLASS_H
+#ifndef WEAPON_A_HPP
+# define WEAPON_A_HPP
 
 # include <string>
+#include <iostream>
 
 class	Weapon
 {
@@ -21,10 +22,11 @@ class	Weapon
 		std::string	_type;
 
 	public:
-		Weapon( std::string const type );
-		~Weapon( void );
-		std::string const	&getType( void ) const;
-		void				setType( std::string const newType );
+		Weapon();
+		Weapon( std::string type );
+		~Weapon();
+		std::string	getType() const;
+		void	setType(std::string newType);
 };
 
 #endif
