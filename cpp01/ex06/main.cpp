@@ -3,26 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/27 14:13:54 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/11/27 16:46:47 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/05/31 22:14:46 by jaoh              #+#    #+#             */
+/*   Updated: 2025/07/07 22:40:33 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
-#include <iostream>
 
-int	main( int ac, char **av )
+int	main(int ac, char **av)
 {
-	Harl	grumblerHarl;
-
 	if (ac != 2)
 	{
-		std::cout << "Usage: ./harlFilter <level>" << std::endl
-			<< "Levels are: DEBUG - INFO - WARNING - ERROR" << std::endl;
-		return ( 0 );
+		std::cout << "Usage: ./harlFilter <level>" << std::endl;
+		return (1);
 	}
-	grumblerHarl.complain(av[1]);
-	return ( 0 );
+	
+	Harl	Harll;
+	
+	Harll.complain(av[1]);
 }

@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/27 14:13:51 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/11/27 15:24:04 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/05/31 22:13:59 by jaoh              #+#    #+#             */
+/*   Updated: 2025/07/07 22:40:32 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_H
-# define HARL_H
+#ifndef HARL_HPP
+# define HARL_HPP
 
-# include <string>
+#include <iostream>
 
 class Harl
 {
 	private:
-		void	_debug( void );
-		void	_info( void );
-		void	_warning( void );
-		void	_error( void );
+		void	_debug();
+		void	_info();
+		void	_warning();
+		void	_error();
 
 	public:
-		Harl( void );
-		~Harl( void );
-		void	complain( std::string level );
+		Harl();
+		~Harl();
+		void	complain(std::string level);
 };
 
 #endif
