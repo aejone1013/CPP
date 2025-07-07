@@ -3,73 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 12:38:01 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/04 14:13:10 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/05/31 22:49:23 by jaoh              #+#    #+#             */
+/*   Updated: 2025/07/07 23:06:54 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Fixed.hpp"
 
-#define RESET "\e[0m"
-#define CYAN "\e[36m"
-#define YELLOW "\e[33m"
-#define GREEN "\e[32m"
-
-/******************************************************************************/
-/*						CONSTRUCTORS & DESTRUCTORS							  */
-/******************************************************************************/
-
-/*	Default Constructor	*/
-Fixed::Fixed( void ) : _raw( 0 )
+/* Constructor	*/
+Fixed::Fixed() : _value(0)
 {
-	std::cerr << CYAN "Default constructor called." RESET << std::endl;
-	return ;
+	std::cout << "Fixed constructor" << std::endl;
 }
 
-/*	Copy Constructor	*/
-Fixed::Fixed( Fixed const & src )
+/* Copy constructor */
+Fixed::Fixed(const Fixed &src) : _value(src._value)
 {
-	std::cerr << CYAN "Copy constructor called." RESET << std::endl;
-	*this = src;
-	return ;
+	std::cout << "Copy constructor" << std::endl;
+
 }
 
-/*	Desctructor	*/
-Fixed::~Fixed( void )
+/* Desctructor */
+Fixed::~Fixed(){}
+
+Fixed &Fixed::operator=(const Fixed &src)
 {
-	std::cerr << CYAN "Destructor called." RESET << std::endl;
-	return ;
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &src)
+		this->_value = src._value;
+	return *this;
 }
 
-/******************************************************************************/
-/*								OPERATORS								  	  */
-/******************************************************************************/
-Fixed &	Fixed::operator=( Fixed const & src )
+int	Fixed::getRawBits() const
 {
-	std::cerr << YELLOW "Copy assignment operator called." RESET << std::endl;
-	if ( this != &src )
-		this->_raw = src.getRawBits();
-	return ( *this );
+	return (this->_value);
 }
 
-/******************************************************************************/
-/*								GETTERS										  */
-/******************************************************************************/
-int	Fixed::getRawBits( void ) const
+void	Fixed::setRawBits(int const raw)
 {
-	std::cerr << GREEN "getRawBits member function called." RESET << std::endl;
-	return ( this->_raw );
-}
-
-/******************************************************************************/
-/*								SETTERS										  */
-/******************************************************************************/
-void	Fixed::setRawBits( int const raw )
-{
-	std::cerr << GREEN "setRawBits member funtion called." RESET << std::endl;
-	this->_raw = raw;
-	return ;
+	this->_value = raw;
 }
