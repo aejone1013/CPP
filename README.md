@@ -2,7 +2,7 @@ cpp00 finished
 cpp01 git pushed
 cpp02
     ex00 done
-    ex01
+    ex01 doing
     ex02
     ex03
 cpp03

@@ -3,32 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 12:38:05 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/03 11:40:08 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/29 13:32:38 by jaoh              #+#    #+#             */
+/*   Updated: 2025/08/12 14:48:49 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_CLASS_H
-# define FIXED_CLASS_H
+#ifndef FIXED_HPP
+# define FIXED_HPP
 
-# include <iostream>
+#include <iostream>
+#include <string>
+#include <cmath>
 
 class Fixed
 {
 	public:
-		Fixed( void );
-		Fixed( Fixed const & src);
-		Fixed( int const n );
-		Fixed( float const f );
-		~Fixed( void );
+		Fixed();
+		Fixed(Fixed const &src);
+		Fixed(int const n);
+		Fixed(float const f);
+		~Fixed();
 
-		Fixed &	operator=( Fixed const & src);
-		int		getRawBits( void ) const;
-		void	setRawBits( int const raw );
-		float	toFloat( void ) const;
-		int		toInt( void ) const;
+		Fixed	&operator=(Fixed const &src);
+		int		getRawBits() const;
+		void	setRawBits(int const raw);
+		float	toFloat() const;
+		int		toInt() const;
 
 	private:
 		int					_raw;
