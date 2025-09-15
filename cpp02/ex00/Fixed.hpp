@@ -14,22 +14,22 @@
 # define FIXED_HPP
 
 #include <iostream>
-#include <string>
 
-class Fixed
-{
-	private:
-		int					_value;
-		static const int	_fractionalBits = 8;
-		
-	public:
-		Fixed();
-		Fixed(const Fixed &src);
-		~Fixed();
-		Fixed	&operator=(const Fixed &src);
-		int		getRawBits() const;
-		void	setRawBits(int const raw);
+class Fixed {
+private:
+    int _value;                           // 고정소수점 값을 저장
+    static const int _fractionalBits = 8; // 소수 부분을 위한 비트 수 (항상 8)
 
+public:
+    // Orthodox Canonical Form (Coplien Form)
+    Fixed();                              // 기본 생성자
+    Fixed(const Fixed& other);           // 복사 생성자
+    Fixed& operator=(const Fixed& other); // 대입 연산자 오버로딩
+    ~Fixed();                            // 소멸자
+
+    // Exercise 00 required functions
+    int getRawBits(void) const;
+    void setRawBits(int const raw);
 };
 
 #endif

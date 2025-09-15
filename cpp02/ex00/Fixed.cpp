@@ -12,36 +12,37 @@
 
 #include "Fixed.hpp"
 
-/* Constructor	*/
-Fixed::Fixed() : _value(0)
-{
-	std::cout << "Fixed constructor" << std::endl;
+// 기본 생성자 - 값을 0으로 초기화
+Fixed::Fixed() : _value(0) {
+    std::cout << "Default constructor called" << std::endl;
 }
 
-/* Copy constructor */
-Fixed::Fixed(const Fixed &src) : _value(src._value)
-{
-	std::cout << "Copy constructor" << std::endl;
-
+// 복사 생성자
+Fixed::Fixed(const Fixed& other) : _value(other._value) {
+    std::cout << "Copy constructor called" << std::endl;
 }
 
-/* Desctructor */
-Fixed::~Fixed(){}
-
-Fixed &Fixed::operator=(const Fixed &src)
-{
-	std::cout << "Copy assignment operator called" << std::endl;
-	if (this != &src)
-		this->_value = src._value;
-	return *this;
+// 대입 연산자 오버로딩
+Fixed& Fixed::operator=(const Fixed& other) {
+    std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &other) {  // 자기 자신과의 대입 방지
+        this->_value = other._value;
+    }
+    return *this;
 }
 
-int	Fixed::getRawBits() const
-{
-	return (this->_value);
+// 소멸자
+Fixed::~Fixed() {
+    std::cout << "Destructor called" << std::endl;
 }
 
-void	Fixed::setRawBits(int const raw)
-{
-	this->_value = raw;
+// 원시값 반환 (변환하지 않음)
+int Fixed::getRawBits(void) const {
+    std::cout << "getRawBits member function called" << std::endl;
+    return _value;
+}
+
+// 원시값 설정
+void Fixed::setRawBits(int const raw) {
+    _value = raw;
 }

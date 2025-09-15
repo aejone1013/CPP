@@ -3,230 +3,167 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 12:38:01 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/04 14:11:34 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/15 15:59:36 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/15 15:59:51 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include <cmath>
-#include "Fixed.hpp"
 
-#define RESET "\e[0m"
-#define CYAN "\e[36m"
-#define YELLOW "\e[33m"
-#define GREEN "\e[32m"
-
-#define PRINT_MESSAGE 0
-/******************************************************************************/
-/*						CONSTRUCTORS & DESTRUCTORS							  */
-/******************************************************************************/
-
-Fixed::Fixed( void ) : _raw( 0 )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << CYAN "Default constructor called." RESET << std::endl;
-	return ;
+// 기본 생성자 - 값을 0으로 초기화
+Fixed::Fixed() : _value(0) {
 }
 
-Fixed::Fixed( Fixed const & src )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << CYAN "Copy constructor called." RESET << std::endl;
-	*this = src;
-	return ;
+// 복사 생성자
+Fixed::Fixed(const Fixed& other) : _value(other._value) {
 }
 
-Fixed::Fixed( int const n ) : _raw( n << _fractionalBits )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << CYAN "Int constructor called." RESET << std::endl;
-	return ;
+// 대입 연산자 오버로딩
+Fixed& Fixed::operator=(const Fixed& other) {
+    if (this != &other) {  // 자기 자신과의 대입 방지
+        this->_value = other._value;
+    }
+    return *this;
 }
 
-Fixed::Fixed( float const f ) : _raw( roundf(f * (1 << _fractionalBits)) )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << CYAN "Float constructor called." RESET << std::endl;
-	return ;
+// 소멸자
+Fixed::~Fixed() {
 }
 
-Fixed::~Fixed( void )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << CYAN "Destructor called." RESET << std::endl;
-	return ;
+// int 생성자 - 정수를 고정소수점으로 변환
+Fixed::Fixed(const int value) {
+    // 정수를 고정소수점으로 변환: 왼쪽으로 _fractionalBits만큼 시프트
+    _value = value << _fractionalBits;
 }
 
-/******************************************************************************/
-/*								OPERATORS								  	  */
-/******************************************************************************/
-
-Fixed &	Fixed::operator=( Fixed const & src )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << YELLOW "Copy assignment operator called." RESET << std::endl;
-	if ( this != &src )
-		this->_raw = src.getRawBits();
-	return ( *this );
+// float 생성자 - 부동소수점을 고정소수점으로 변환
+Fixed::Fixed(const float value) {
+    // 부동소수점을 고정소수점으로 변환: 2^8 = 256을 곱하고 반올림
+    _value = roundf(value * (1 << _fractionalBits));
 }
 
-bool	Fixed::operator>( Fixed const & rhs ) const
-{
-	if ( this->_raw > rhs.getRawBits() )
-		return ( true );
-	return ( false );
+// 원시값 반환 (변환하지 않음)
+int Fixed::getRawBits(void) const {
+    return _value;
 }
 
-bool	Fixed::operator<( Fixed const & rhs ) const
-{
-	if ( this->_raw < rhs.getRawBits() )
-		return ( true );
-	return ( false );
+// 원시값 설정
+void Fixed::setRawBits(int const raw) {
+    _value = raw;
 }
 
-bool	Fixed::operator>=( Fixed const & rhs ) const
-{
-	if ( this->_raw >= rhs.getRawBits() )
-		return ( true );
-	return ( false );
+// 고정소수점을 부동소수점으로 변환
+float Fixed::toFloat(void) const {
+    // 2^8로 나누어서 부동소수점으로 변환
+    return static_cast<float>(_value) / (1 << _fractionalBits);
 }
 
-bool	Fixed::operator<=( Fixed const & rhs ) const
-{
-	if ( this->_raw <= rhs.getRawBits() )
-		return ( true );
-	return ( false );
+// 고정소수점을 정수로 변환
+int Fixed::toInt(void) const {
+    // 오른쪽으로 _fractionalBits만큼 시프트하여 정수 부분만 추출
+    return _value >> _fractionalBits;
 }
 
-bool	Fixed::operator==( Fixed const & rhs ) const
-{
-	if ( this->_raw == rhs.getRawBits() )
-		return ( true );
-	return ( false );
+// ==================== 비교 연산자들 ====================
+bool Fixed::operator>(const Fixed& other) const {
+    return _value > other._value;
 }
 
-bool	Fixed::operator!=( Fixed const & rhs ) const
-{
-	if ( this->_raw != rhs.getRawBits() )
-		return ( true );
-	return ( false );
+bool Fixed::operator<(const Fixed& other) const {
+    return _value < other._value;
 }
 
-Fixed	Fixed::operator+( Fixed const & rhs ) const
-{
-	return ( Fixed( this->toFloat() + rhs.toFloat() ) );
+bool Fixed::operator>=(const Fixed& other) const {
+    return _value >= other._value;
 }
 
-Fixed	Fixed::operator-( Fixed const & rhs ) const
-{
-	return ( Fixed( this->toFloat() - rhs.toFloat() ) );
+bool Fixed::operator<=(const Fixed& other) const {
+    return _value <= other._value;
 }
 
-Fixed	Fixed::operator*( Fixed const & rhs ) const
-{
-	return ( Fixed( this->toFloat() * rhs.toFloat() ) );
+bool Fixed::operator==(const Fixed& other) const {
+    return _value == other._value;
 }
 
-Fixed	Fixed::operator/( Fixed const & rhs ) const
-{
-	return ( Fixed( this->toFloat() / rhs.toFloat() ) );
+bool Fixed::operator!=(const Fixed& other) const {
+    return _value != other._value;
 }
 
-Fixed &	Fixed::operator++( void ) // Prefix, i.e. ++fixed
-{
-	this->_raw += 1;
-	return ( *this );
+// ==================== 산술 연산자들 ====================
+Fixed Fixed::operator+(const Fixed& other) const {
+    Fixed result;
+    result._value = _value + other._value;
+    return result;
 }
 
-Fixed Fixed::operator++( int ) // Postfix, i.e. fixed++
-{
-	Fixed	tmp( *this );
-
-	++(*this);
-	return ( tmp );
+Fixed Fixed::operator-(const Fixed& other) const {
+    Fixed result;
+    result._value = _value - other._value;
+    return result;
 }
 
-Fixed &	Fixed::operator--( void ) // Prefix, i.e. --fixed
-{
-	this->_raw -= 1;
-	return ( *this );
+Fixed Fixed::operator*(const Fixed& other) const {
+    Fixed result;
+    // 고정소수점 곱셈: 결과를 다시 _fractionalBits만큼 오른쪽으로 시프트
+    result._value = (_value * other._value) >> _fractionalBits;
+    return result;
 }
 
-Fixed Fixed::operator--( int ) // Postfix, i.e. fixed--
-{
-	Fixed	tmp( *this );
-
-	--(*this);
-	return ( tmp );
+Fixed Fixed::operator/(const Fixed& other) const {
+    Fixed result;
+    // 고정소수점 나눗셈: _value를 먼저 왼쪽으로 시프트한 후 나눔
+    result._value = (_value << _fractionalBits) / other._value;
+    return result;
 }
 
-/******************************************************************************/
-/*								GETTERS										  */
-/******************************************************************************/
-int	Fixed::getRawBits( void ) const
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << GREEN "getRawBits member function called." RESET << std::endl;
-	return ( this->_raw );
+// ==================== 증감 연산자들 ====================
+// 전위 증가 (++a) - 가장 작은 증가값 1/256 = 0.00390625
+Fixed& Fixed::operator++() {
+    _value++;
+    return *this;
 }
 
-/******************************************************************************/
-/*								SETTERS										  */
-/******************************************************************************/
-void	Fixed::setRawBits( int const raw )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << GREEN "setRawBits member funtion called." RESET << std::endl;
-	this->_raw = raw;
-	return ;
+// 후위 증가 (a++) - 이전 값을 반환
+Fixed Fixed::operator++(int) {
+    Fixed temp(*this);
+    _value++;
+    return temp;
 }
 
-/******************************************************************************/
-/*							PUBLIC FUNCTIONS								  */
-/******************************************************************************/
-int		Fixed::toInt( void ) const
-{
-	return ( this->_raw >> Fixed::_fractionalBits );	
+// 전위 감소 (--a)
+Fixed& Fixed::operator--() {
+    _value--;
+    return *this;
 }
 
-float	Fixed::toFloat( void ) const
-{
-	return ( (float)this->_raw / (1 << _fractionalBits) );
+// 후위 감소 (a--)
+Fixed Fixed::operator--(int) {
+    Fixed temp(*this);
+    _value--;
+    return temp;
 }
 
-Fixed &	Fixed::min( Fixed & lhs, Fixed & rhs )
-{
-	if ( lhs <= rhs )
-		return ( lhs );
-	return ( rhs );
+// ==================== static min/max 함수들 ====================
+Fixed& Fixed::min(Fixed& a, Fixed& b) {
+    return (a < b) ? a : b;
 }
 
-Fixed const &	Fixed::min( Fixed const & lhs, Fixed const & rhs )
-{
-	if ( lhs <= rhs )
-		return ( lhs );
-	return ( rhs );
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b) {
+    return (a < b) ? a : b;
 }
 
-Fixed &	Fixed::max( Fixed & lhs, Fixed & rhs )
-{
-	if ( lhs >= rhs )
-		return ( lhs );
-	return ( rhs );
+Fixed& Fixed::max(Fixed& a, Fixed& b) {
+    return (a > b) ? a : b;
 }
 
-Fixed const &	Fixed::max( Fixed const & lhs, Fixed const & rhs )
-{
-	if ( lhs >= rhs )
-		return ( lhs );
-	return ( rhs );
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b) {
+    return (a > b) ? a : b;
 }
 
-std::ostream& operator<<( std::ostream& os, const Fixed& number )
-{
-	os << number.toFloat();
-	return ( os );
+// 스트림 출력 연산자
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
+    out << fixed.toFloat();
+    return out;
 }

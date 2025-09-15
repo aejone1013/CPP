@@ -3,76 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   Point.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/03 12:19:28 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/05 11:13:32 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/15 16:00:01 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/15 16:01:43 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
-#include "Fixed.hpp"
 
-#define RESET "\e[0m"
-#define CYAN "\e[36m"
-#define YELLOW "\e[33m"
-#define GREEN "\e[32m"
-
-# define PRINT_MESSAGE 0
-
-/******************************************************************************/
-/*						CONSTRUCTORS & DESTRUCTORS							  */
-/******************************************************************************/
-Point::Point( void ) : _x( 0 ), _y( 0 )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << CYAN "Point default constructor called." RESET << std::endl;
-	return ;
+// 기본 생성자 - (0, 0)으로 초기화
+Point::Point() : _x(0), _y(0) {
 }
 
-Point::Point( Fixed const x, Fixed const y ) : _x( x ), _y( y )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << CYAN "Point fixed constructor called." RESET << std::endl;
-	return ;
+// float 매개변수 생성자
+Point::Point(const float x, const float y) : _x(x), _y(y) {
 }
 
-Point::Point( Point const & src ) : _x( src.getX() ), _y( src.getY() )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << CYAN "Point copy constructor called." RESET << std::endl;
-	return ;
+// 복사 생성자
+Point::Point(const Point& other) : _x(other._x), _y(other._y) {
 }
 
-Point::~Point( void )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << CYAN "Point destructor called." RESET << std::endl;
-	return ;
+// 대입 연산자 - const 멤버 변수 때문에 실제로는 대입 불가
+Point& Point::operator=(const Point& other) {
+    // const 멤버 변수는 대입할 수 없으므로 그대로 반환
+    (void)other;  // 사용하지 않는 매개변수 경고 방지
+    return *this;
 }
 
-/******************************************************************************/
-/*								OPERATORS								  	  */
-/******************************************************************************/
-Point &	Point::operator=( Point const & rhs )
-{
-	if ( PRINT_MESSAGE == 1 )
-		std::cerr << YELLOW "Point assignment operator called." RESET << std::endl;
-	std::cerr << "Warning: cannot assign to Point const attributes. "
-		"Use a Point copy constructor instead." << std::endl;
-	(void)rhs;
-	return ( *this );
+// 소멸자
+Point::~Point() {
 }
 
-/******************************************************************************/
-/*								GETTERS										  */
-/******************************************************************************/
-Fixed const &	Point::getX( void ) const
-{
-	return ( this->_x );
+// getter 함수들
+Fixed Point::getX() const {
+    return _x;
 }
 
-Fixed const &	Point::getY( void ) const
-{
-	return ( this->_y );
+Fixed Point::getY() const {
+    return _y;
 }

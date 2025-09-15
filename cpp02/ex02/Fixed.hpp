@@ -3,61 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/01 12:38:05 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/03 11:40:46 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/15 15:53:36 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/15 15:53:37 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_CLASS_H
 # define FIXED_CLASS_H
 
-# include <iostream>
+#include <iostream>
 
-class Fixed
-{
-	public:
-		Fixed( void );
-		Fixed( Fixed const & src);
-		Fixed( int const n );
-		Fixed( float const f );
-		~Fixed( void );
+class Fixed {
+private:
+    int _value;                           // 고정소수점 값을 저장
+    static const int _fractionalBits = 8; // 소수 부분을 위한 비트 수 (항상 8)
 
-		Fixed &	operator=( Fixed const & src);
+public:
+    // Orthodox Canonical Form (Coplien Form)
+    Fixed();                              // 기본 생성자
+    Fixed(const Fixed& other);           // 복사 생성자
+    Fixed& operator=(const Fixed& other); // 대입 연산자 오버로딩
+    ~Fixed();                            // 소멸자
 
-		bool	operator>( Fixed const & rhs ) const;
-		bool	operator<( Fixed const & rhs ) const;
-		bool	operator>=( Fixed const & rhs ) const;
-		bool	operator<=( Fixed const & rhs ) const;
-		bool	operator==( Fixed const & rhs ) const;
-		bool	operator!=( Fixed const & rhs ) const;
+    // Exercise 00 functions
+    int getRawBits(void) const;
+    void setRawBits(int const raw);
 
-		Fixed	operator+( Fixed const & rhs ) const;
-		Fixed	operator-( Fixed const & rhs ) const;
-		Fixed	operator*( Fixed const & rhs ) const;
-		Fixed	operator/( Fixed const & rhs ) const;
+    // Exercise 01 additions
+    Fixed(const int value);               // int 생성자
+    Fixed(const float value);             // float 생성자
+    float toFloat(void) const;            // float로 변환
+    int toInt(void) const;                // int로 변환
 
-		Fixed &	operator++( void );
-		Fixed	operator++( int	);
-		Fixed &	operator--( void );
-		Fixed	operator--( int );
+    // Exercise 02 additions - 비교 연산자들
+    bool operator>(const Fixed& other) const;
+    bool operator<(const Fixed& other) const;
+    bool operator>=(const Fixed& other) const;
+    bool operator<=(const Fixed& other) const;
+    bool operator==(const Fixed& other) const;
+    bool operator!=(const Fixed& other) const;
 
-		int		getRawBits( void ) const;
-		void	setRawBits( int const raw );
-		float	toFloat( void ) const;
-		int		toInt( void ) const;
+    // 산술 연산자들
+    Fixed operator+(const Fixed& other) const;
+    Fixed operator-(const Fixed& other) const;
+    Fixed operator*(const Fixed& other) const;
+    Fixed operator/(const Fixed& other) const;
 
-		static Fixed &			min( Fixed & lhs, Fixed & rhs );
-		static Fixed &			max( Fixed & lhs, Fixed & rhs );
-		static Fixed const &	min( Fixed const & lhs, Fixed const & rhs );
-		static Fixed const &	max( Fixed const & lhs, Fixed const & rhs );
+    // 증가/감소 연산자들 (전위, 후위)
+    Fixed& operator++();      // 전위 증가 (++a)
+    Fixed operator++(int);    // 후위 증가 (a++)
+    Fixed& operator--();      // 전위 감소 (--a)
+    Fixed operator--(int);    // 후위 감소 (a--)
 
-	private:
-		int					_raw;
-		static const int	_fractionalBits = 8;
+    // static min/max 함수들
+    static Fixed& min(Fixed& a, Fixed& b);
+    static const Fixed& min(const Fixed& a, const Fixed& b);
+    static Fixed& max(Fixed& a, Fixed& b);
+    static const Fixed& max(const Fixed& a, const Fixed& b);
 };
 
-std::ostream & operator<<( std::ostream & os, const Fixed & number );
+// 스트림 출력 연산자 (클래스 외부에서 정의)
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed);
 
 #endif

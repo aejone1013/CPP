@@ -3,34 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/03 12:19:24 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/03 12:41:43 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/15 16:00:26 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/15 16:01:45 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINT_CLASS_H
-# define POINT_CLASS_H
+#define POINT_HPP
 
-# include "Fixed.hpp"
+#include "Fixed.hpp"
 
-class	Point
-{
-	public:
-		Point( void );
-		Point( Fixed const x, Fixed const y );
-		Point( Point const & src );
-		~Point( void );
+class Point {
+private:
+    const Fixed _x;  // x 좌표 (상수)
+    const Fixed _y;  // y 좌표 (상수)
 
-		Point & operator=( Point const & src );
+public:
+    // Orthodox Canonical Form
+    Point();                              // 기본 생성자 (0, 0)
+    Point(const float x, const float y);  // float 매개변수 생성자
+    Point(const Point& other);           // 복사 생성자
+    Point& operator=(const Point& other); // 대입 연산자
+    ~Point();                            // 소멸자
 
-		Fixed const &	getX( void ) const;
-		Fixed const &	getY( void ) const;
-
-	private:
-		Fixed const	_x;
-		Fixed const	_y;
+    // getter 함수들
+    Fixed getX() const;
+    Fixed getY() const;
 };
+
+// BSP 함수 선언
+bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif
