@@ -6,6 +6,7 @@ cpp02
     ex02 done
     ex03 done
 cpp03
+    ex00 doing
 cpp04
 cpp05
 cpp06
