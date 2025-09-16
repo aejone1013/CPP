@@ -3,90 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 16:59:01 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/26 11:02:38 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/16 15:08:43 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/16 15:09:11 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Colors.h"
 #include "ScavTrap.hpp"
-#include <iostream>
-#include <string>
 
-ScavTrap::ScavTrap(void) : ClapTrap() {
-	std::cout << CYAN "ScavTrap default constructor called." RESET << std::endl;
-	this->_hitPoints = SCAVTRAP_DEFAULT_HIT_POINTS;
-	this->_maxHitPoints = SCAVTRAP_DEFAULT_HIT_POINTS;
-	this->_energyPoints = SCAVTRAP_DEFAULT_ENERGY_POINTS;
-	this->_maxEnergyPoints = SCAVTRAP_DEFAULT_ENERGY_POINTS;
-	this->_attackDamage = SCAVTRAP_DEFAULT_ATTACK_DAMAGE;
-	this->_maxAttackDamage = SCAVTRAP_DEFAULT_ATTACK_DAMAGE;
-	return ;
+// 기본 생성자
+ScavTrap::ScavTrap() : ClapTrap() {
+    _hitPoints = 100;   // ScavTrap 기본값
+    _energyPoints = 50;
+    _attackDamage = 20;
+    std::cout << "ScavTrap default constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string & name) : ClapTrap(name) {
-	std::cout << CYAN "A ScavTrap named \"" << name << "\" was constructed."
-		RESET << std::endl;
-	this->_hitPoints = SCAVTRAP_DEFAULT_HIT_POINTS;
-	this->_maxHitPoints = SCAVTRAP_DEFAULT_HIT_POINTS;
-	this->_energyPoints = SCAVTRAP_DEFAULT_ENERGY_POINTS;
-	this->_maxEnergyPoints = SCAVTRAP_DEFAULT_ENERGY_POINTS;
-	this->_attackDamage = SCAVTRAP_DEFAULT_ATTACK_DAMAGE;
-	this->_maxAttackDamage = SCAVTRAP_DEFAULT_ATTACK_DAMAGE;
-	return ;
+// 매개변수 생성자
+ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name) {
+    _hitPoints = 100;   // ScavTrap 기본값
+    _energyPoints = 50;
+    _attackDamage = 20;
+    std::cout << "ScavTrap " << _name << " constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(ScavTrap const & src) : ClapTrap() {
-	std::cout << CYAN "ScavTrap copy constructor called." RESET << std::endl;
-	*this = src;
-	return ;
+// 복사 생성자
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
+    std::cout << "ScavTrap copy constructor called" << std::endl;
 }
 
-ScavTrap::~ScavTrap(void) {
-	std::cout << CYAN "The ScavTrap named \"" << this->_name
-		<< "\" was destroyed." RESET << std::endl;
-	return ;
+// 대입 연산자
+ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
+    std::cout << "ScavTrap assignment operator called" << std::endl;
+    if (this != &other) {
+        ClapTrap::operator=(other);
+    }
+    return *this;
 }
 
-ScavTrap &	ScavTrap::operator=(ScavTrap const & src) {
-	if (this != &src) {
-		this->_name = src.getName();
-		this->_hitPoints = src.getHitPoints();
-		this->_energyPoints = src.getEnergyPoints();
-		this->_attackDamage = src.getAttackDamage();
-	}
-	return (*this);
+// 소멸자
+ScavTrap::~ScavTrap() {
+    std::cout << "ScavTrap " << _name << " destructor called" << std::endl;
 }
 
-void	ScavTrap::attack(std::string & target) {
-	if (this->_hitPoints == 0) {
-		std::cout << YELLOW "ScavTrap " << this->_name
-			<< " can't attack: it is destroyed." RESET << std::endl;
-		return ;
-	}
-	if (this->_energyPoints == 0) {
-		std::cout << YELLOW "ScavTrap " << this->_name
-			<< " can't attack: its battery is depleted." RESET
-			<< std::endl;
-		return ;
-	}
-	if (target == this->_name)
-		target = "itself";
-	_energyPoints--;
-	std::cout << YELLOW "ScavTrap " << this->_name
-		<< " leaps on " << target << " and crushes it for " << this->_attackDamage
-		<< " damage!" RESET << std::endl;  
+// 오버라이드된 공격 함수 (다른 메시지)
+void ScavTrap::attack(const std::string& target) {
+    if (_hitPoints == 0) {
+        std::cout << "ScavTrap " << _name << " is dead and cannot attack!" << std::endl;
+        return;
+    }
+    if (_energyPoints == 0) {
+        std::cout << "ScavTrap " << _name << " has no energy left to attack!" << std::endl;
+        return;
+    }
+    
+    _energyPoints--;
+    std::cout << "ScavTrap " << _name << " fiercely attacks " << target 
+              << ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 
-void	ScavTrap::guardGate(void) {
-	if (this->_hitPoints == 0)
-		std::cout << PURPLE << this->_name
-			<< "can't guard the gate in its broken state." RESET << std::endl;
-	else
-		std::cout << PURPLE << this->_name
-			<< " switches to Gate guarding mode." RESET << std::endl;
-	return ;
+// Gate keeper 모드
+void ScavTrap::guardGate() {
+    std::cout << "ScavTrap " << _name << " is now in Gate keeper mode!" << std::endl;
 }
-

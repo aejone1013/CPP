@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 17:16:03 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/15 17:18:18 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/09/16 15:13:47 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 // 기본 생성자
 ClapTrap::ClapTrap() : _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-    std::cout << "ClapTrap " << _name << " constructed (default)" << std::endl;
+    std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
 // 매개변수 생성자
 ClapTrap::ClapTrap(const std::string& name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-    std::cout << "ClapTrap " << _name << " constructed" << std::endl;
+    std::cout << "ClapTrap " << _name << " constructor called" << std::endl;
 }
 
 // 복사 생성자
 ClapTrap::ClapTrap(const ClapTrap& other) {
+    std::cout << "ClapTrap copy constructor called" << std::endl;
     *this = other;
-    std::cout << "ClapTrap " << _name << " copied" << std::endl;
 }
 
 // 대입 연산자
 ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
+    std::cout << "ClapTrap assignment operator called" << std::endl;
     if (this != &other) {
         _name = other._name;
         _hitPoints = other._hitPoints;
@@ -41,43 +42,73 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
 
 // 소멸자
 ClapTrap::~ClapTrap() {
-    std::cout << "ClapTrap " << _name << " destroyed" << std::endl;
+    std::cout << "ClapTrap " << _name << " destructor called" << std::endl;
 }
 
-// 공격
+// 공격 함수
 void ClapTrap::attack(const std::string& target) {
-    if (_hitPoints == 0 || _energyPoints == 0) {
-        std::cout << "ClapTrap " << _name << " has no energy/hit points to attack!" << std::endl;
+    if (_hitPoints == 0) {
+        std::cout << "ClapTrap " << _name << " is dead and cannot attack!" << std::endl;
         return;
     }
+    if (_energyPoints == 0) {
+        std::cout << "ClapTrap " << _name << " has no energy left to attack!" << std::endl;
+        return;
+    }
+    
     _energyPoints--;
     std::cout << "ClapTrap " << _name << " attacks " << target 
               << ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 
-// 피해 받기
+// 피해 받기 함수
 void ClapTrap::takeDamage(unsigned int amount) {
-    if (_hitPoints <= amount)
-        _hitPoints = 0;
-    else
-        _hitPoints -= amount;
-    std::cout << "ClapTrap " << _name << " takes " << amount 
-              << " damage, HP left: " << _hitPoints << std::endl;
-}
-
-// 수리
-void ClapTrap::beRepaired(unsigned int amount) {
-    if (_hitPoints == 0 || _energyPoints == 0) {
-        std::cout << "ClapTrap " << _name << " has no energy/hit points to repair!" << std::endl;
+    if (_hitPoints == 0) {
+        std::cout << "ClapTrap " << _name << " is already dead!" << std::endl;
         return;
     }
-    _hitPoints += amount;
-    _energyPoints--;
-    std::cout << "ClapTrap " << _name << " repairs itself, HP: " << _hitPoints << std::endl;
+    
+    if (amount >= _hitPoints) {
+        _hitPoints = 0;
+        std::cout << "ClapTrap " << _name << " takes " << amount 
+                  << " points of damage and is destroyed!" << std::endl;
+    } else {
+        _hitPoints -= amount;
+        std::cout << "ClapTrap " << _name << " takes " << amount 
+                  << " points of damage! Hit points: " << _hitPoints << std::endl;
+    }
 }
 
-// Getter
-std::string ClapTrap::getName() const { return _name; }
-unsigned int ClapTrap::getHitPoints() const { return _hitPoints; }
-unsigned int ClapTrap::getEnergyPoints() const { return _energyPoints; }
-unsigned int ClapTrap::getAttackDamage() const { return _attackDamage; }
+// 수리 함수
+void ClapTrap::beRepaired(unsigned int amount) {
+    if (_hitPoints == 0) {
+        std::cout << "ClapTrap " << _name << " is dead and cannot be repaired!" << std::endl;
+        return;
+    }
+    if (_energyPoints == 0) {
+        std::cout << "ClapTrap " << _name << " has no energy left to repair!" << std::endl;
+        return;
+    }
+    
+    _energyPoints--;
+    _hitPoints += amount;
+    std::cout << "ClapTrap " << _name << " repairs itself for " << amount 
+              << " hit points! Current hit points: " << _hitPoints << std::endl;
+}
+
+// getter 함수들
+std::string ClapTrap::getName() const {
+    return _name;
+}
+
+unsigned int ClapTrap::getHitPoints() const {
+    return _hitPoints;
+}
+
+unsigned int ClapTrap::getEnergyPoints() const {
+    return _energyPoints;
+}
+
+unsigned int ClapTrap::getAttackDamage() const {
+    return _attackDamage;
+}
