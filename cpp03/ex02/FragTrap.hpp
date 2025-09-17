@@ -3,35 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 18:28:00 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/14 12:44:52 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/17 23:36:04 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/17 23:38:14 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_CLASS_H
-# define FRAGTRAP_CLASS_H
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
 #include "ClapTrap.hpp"
 
-# define FRAGTRAP_DEFAULT_HIT_POINTS 100
-# define FRAGTRAP_DEFAULT_ENERGY_POINTS 100
-# define FRAGTRAP_DEFAULT_ATTACK_DAMAGE 30
+class FragTrap : public ClapTrap {
+public:
+    // Orthodox Canonical Form
+    FragTrap();                                    // 기본 생성자
+    FragTrap(const std::string& name);            // 매개변수 생성자
+    FragTrap(const FragTrap& other);              // 복사 생성자
+    FragTrap& operator=(const FragTrap& other);   // 대입 연산자
+    ~FragTrap();                                  // 소멸자
 
-class FragTrap : public ClapTrap
-{
-	public:
-		FragTrap(std::string & name);
-		FragTrap(FragTrap const & src);
-		~FragTrap(void);
-
-		FragTrap &	operator=(FragTrap const & src);
-
-		void	highFivesGuys(void);
-
-	private:
-		FragTrap(void);
+    // FragTrap 고유 기능
+    void highFivesGuys(void);                     // High five 요청
 };
 
 #endif
