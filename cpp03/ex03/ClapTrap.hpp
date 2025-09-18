@@ -3,50 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 14:42:45 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/04 18:05:09 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/17 23:35:13 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/18 17:15:27 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_CLASS_H
-# define CLAPTRAP_CLASS_H
+#ifndef CLAPTRAP_HPP
+# define CLAPTRAP_HPP
 
-# include <string>
+#include <iostream>
+#include <string>
 
-# define CLAPTRAP_DEFAULT_HIT_POINTS 10
-# define CLAPTRAP_DEFAULT_ENERGY_POINTS 10
-# define CLAPTRAP_DEFAULT_ATTACK_DAMAGE 0
+class ClapTrap {
+protected:  // private에서 protected로 변경 (상속을 위해)
+    std::string _name;        // 이름 (생성자 매개변수로 전달)
+    unsigned int _hitPoints;  // 체력
+    unsigned int _energyPoints; // 에너지
+    unsigned int _attackDamage; // 공격력
 
-class ClapTrap
-{
-	public:
-		ClapTrap(std::string name);
-		ClapTrap(ClapTrap const & src);
-		~ClapTrap(void);
+public:
+    // Orthodox Canonical Form
+    ClapTrap();                                    // 기본 생성자
+    ClapTrap(const std::string& name);            // 매개변수 생성자
+    ClapTrap(const ClapTrap& other);              // 복사 생성자
+    ClapTrap& operator=(const ClapTrap& other);   // 대입 연산자
+    ~ClapTrap();                                  // 소멸자
 
-		ClapTrap &	operator=(ClapTrap const & src);
-		
-		std::string		getName(void) const;
-		unsigned int	getHitPoints(void) const;
-		unsigned int	getEnergyPoints(void) const;
-		unsigned int	getAttackDamage(void) const;
-		
-		void		attack(std::string & target);
-		void		takeDamage(unsigned int amount);
-		void		beRepaired(unsigned int amount);
+    // 멤버 함수들
+    void attack(const std::string& target);       // 공격
+    void takeDamage(unsigned int amount);         // 피해 받기
+    void beRepaired(unsigned int amount);         // 수리하기
 
-	protected:
-		ClapTrap(void);
-
-		std::string		_name;
-		unsigned int	_hitPoints;
-		unsigned int	_energyPoints;
-		unsigned int	_attackDamage;
-		unsigned int	_maxHitPoints;
-		unsigned int	_maxEnergyPoints;
-		unsigned int	_maxAttackDamage;
+    // getter 함수들
+    std::string getName() const;
+    unsigned int getHitPoints() const;
+    unsigned int getEnergyPoints() const;
+    unsigned int getAttackDamage() const;
 };
 
 #endif

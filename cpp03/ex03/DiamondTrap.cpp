@@ -3,77 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/05 11:20:35 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/18 18:36:27 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/18 17:14:41 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/18 17:18:25 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Colors.h"
 #include "DiamondTrap.hpp"
-#include <iostream>
 
-DiamondTrap::DiamondTrap(void) : FragTrap(), ScavTrap()
-{
-	std::cout << CYAN "DiamondTrap default constructor called." RESET << std::endl;
-	this->_hitPoints = FragTrap::_maxHitPoints;
-	this->_maxHitPoints = FragTrap::_maxHitPoints;
-	this->_energyPoints = ScavTrap::_maxEnergyPoints;
-	this->_maxEnergyPoints = ScavTrap::_maxEnergyPoints;
-	this->_attackDamage = FragTrap::_maxAttackDamage;
-	this->_maxAttackDamage = FragTrap::_maxAttackDamage;
-	return ;
+// 기본 생성자
+DiamondTrap::DiamondTrap() : ClapTrap("Default_clap_name"), FragTrap(), ScavTrap(), _name("Default") {
+    // DiamondTrap 명세에 따른 속성 설정
+    _hitPoints = FragTrap::_hitPoints;        // FragTrap에서 체력 (100)
+    _energyPoints = ScavTrap::_energyPoints;  // ScavTrap에서 에너지 (50)
+    _attackDamage = FragTrap::_attackDamage;  // FragTrap에서 공격력 (30)
+    
+    std::cout << "DiamondTrap default constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name)
-	: ClapTrap(name + "_clap_name"),
-	FragTrap(name + "_frag_name"),
-	ScavTrap(name + "_scav_name"),
-	_name(name)
-{
-	std::cout << CYAN "A DiamondTrap named \"" << name << "\" was constructed."
-		RESET << std::endl;
-	this->_hitPoints = FragTrap::_maxHitPoints;
-	this->_maxHitPoints = FragTrap::_maxHitPoints;
-	this->_energyPoints = ScavTrap::_maxEnergyPoints;
-	this->_maxEnergyPoints = ScavTrap::_maxEnergyPoints;
-	this->_attackDamage = FragTrap::_maxAttackDamage;
-	this->_maxAttackDamage = FragTrap::_maxAttackDamage;	
+// 매개변수 생성자
+DiamondTrap::DiamondTrap(const std::string& name) 
+    : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name), _name(name) {
+    // DiamondTrap 명세에 따른 속성 설정
+    _hitPoints = FragTrap::_hitPoints;        // FragTrap에서 체력 (100)
+    _energyPoints = ScavTrap::_energyPoints;  // ScavTrap에서 에너지 (50)  
+    _attackDamage = FragTrap::_attackDamage;  // FragTrap에서 공격력 (30)
+    
+    std::cout << "DiamondTrap " << _name << " constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap const & src) : ClapTrap(), FragTrap(), ScavTrap()
-{
-	std::cout << CYAN "DiamondTrap copy constructor called." RESET << std::endl;
-	*this = src;
-	return ;
+// 복사 생성자
+DiamondTrap::DiamondTrap(const DiamondTrap& other) 
+    : ClapTrap(other), FragTrap(other), ScavTrap(other), _name(other._name) {
+    std::cout << "DiamondTrap copy constructor called" << std::endl;
 }
 
-DiamondTrap::~DiamondTrap(void)
-{
-	std::cout << CYAN "The DiamondTrap named \"" << this->_name
-		<< "\" was destroyed." RESET << std::endl;
-	return ;
+// 대입 연산자
+DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other) {
+    std::cout << "DiamondTrap assignment operator called" << std::endl;
+    if (this != &other) {
+        ClapTrap::operator=(other);
+        FragTrap::operator=(other);
+        ScavTrap::operator=(other);
+        _name = other._name;
+    }
+    return *this;
 }
 
-DiamondTrap &	DiamondTrap::operator=(DiamondTrap const & src)
-{
-	if (this != &src) {
-		this->_name = src.getName();
-		this->_hitPoints = src.getHitPoints();
-		this->_energyPoints = src.getEnergyPoints();
-		this->_attackDamage = src.getAttackDamage();
-	}
-	return (*this);
+// 소멸자
+DiamondTrap::~DiamondTrap() {
+    std::cout << "DiamondTrap " << _name << " destructor called" << std::endl;
 }
 
-void	DiamondTrap::whoAmI(void)
-{
-	if (this->_hitPoints == 0)
-		std::cout << PURPLE << this->_name
-			<< ", grandchild of " << ClapTrap::_name << " rests in pieces." << std::endl;
-	else
-		std::cout << PURPLE << "I AM " << this->_name
-			<< ", GRANDCHILD OF THE MIGHTY " << ClapTrap::_name << "!" << std::endl;
-	return ;
+// whoAmI 함수 - DiamondTrap 이름과 ClapTrap 이름 출력
+void DiamondTrap::whoAmI() {
+    std::cout << "I am " << _name << " and my ClapTrap name is " << ClapTrap::_name << std::endl;
 }

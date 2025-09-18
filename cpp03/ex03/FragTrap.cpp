@@ -3,70 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 18:27:48 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/18 18:36:33 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/17 23:37:56 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/18 17:17:43 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Colors.h"
 #include "FragTrap.hpp"
-#include <iostream>
-#include <string>
 
-FragTrap::FragTrap(void) : ClapTrap() {
-	std::cout << CYAN "FragTrap default constructor called." RESET << std::endl;
-	this->_hitPoints = FRAGTRAP_DEFAULT_HIT_POINTS;
-	this->_maxHitPoints = FRAGTRAP_DEFAULT_HIT_POINTS;
-	this->_energyPoints = FRAGTRAP_DEFAULT_ENERGY_POINTS;
-	this->_maxEnergyPoints = FRAGTRAP_DEFAULT_ENERGY_POINTS;
-	this->_attackDamage = FRAGTRAP_DEFAULT_ATTACK_DAMAGE;
-	this->_maxAttackDamage = FRAGTRAP_DEFAULT_ATTACK_DAMAGE;
-	return ;
+// 기본 생성자
+FragTrap::FragTrap() : ClapTrap() {
+    _hitPoints = 100;   // FragTrap 기본값
+    _energyPoints = 100;
+    _attackDamage = 30;
+    std::cout << "FragTrap default constructor called" << std::endl;
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name) {
-	std::cout << CYAN "A FragTrap named \"" << name << "\" was constructed."
-		RESET << std::endl;
-	this->_hitPoints = FRAGTRAP_DEFAULT_HIT_POINTS;
-	this->_maxHitPoints = FRAGTRAP_DEFAULT_HIT_POINTS;
-	this->_energyPoints = FRAGTRAP_DEFAULT_ENERGY_POINTS;
-	this->_maxEnergyPoints = FRAGTRAP_DEFAULT_ENERGY_POINTS;
-	this->_attackDamage = FRAGTRAP_DEFAULT_ATTACK_DAMAGE;
-	this->_maxAttackDamage = FRAGTRAP_DEFAULT_ATTACK_DAMAGE;
-	return ;
+// 매개변수 생성자
+FragTrap::FragTrap(const std::string& name) : ClapTrap(name) {
+    _hitPoints = 100;   // FragTrap 기본값
+    _energyPoints = 100;
+    _attackDamage = 30;
+    std::cout << "FragTrap " << _name << " constructor called" << std::endl;
 }
 
-FragTrap::FragTrap(FragTrap const & src) : ClapTrap() {
-	std::cout << CYAN "FragTrap copy constructor called." RESET << std::endl;
-	*this = src;
-	return ;
+// 복사 생성자
+FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other) {
+    std::cout << "FragTrap copy constructor called" << std::endl;
 }
 
-FragTrap::~FragTrap(void) {
-	std::cout << CYAN "The FragTrap named \"" << this->_name
-		<< "\" was destroyed." RESET << std::endl;
-	return ;
+// 대입 연산자
+FragTrap& FragTrap::operator=(const FragTrap& other) {
+    std::cout << "FragTrap assignment operator called" << std::endl;
+    if (this != &other) {
+        ClapTrap::operator=(other);
+    }
+    return *this;
 }
 
-FragTrap &	FragTrap::operator=(FragTrap const & src) {
-	if (this != &src) {
-		this->_name = src.getName();
-		this->_hitPoints = src.getHitPoints();
-		this->_energyPoints = src.getEnergyPoints();
-		this->_attackDamage = src.getAttackDamage();
-	}
-	return (*this);
+// 소멸자
+FragTrap::~FragTrap() {
+    std::cout << "FragTrap " << _name << " destructor called" << std::endl;
 }
 
-void	FragTrap::highFivesGuys(void) {
-	if (this->_hitPoints == 0)
-		std::cout << PURPLE << this->_name
-			<< " extends a fingerless hand from its debris for a high-five."
-			RESET << std::endl;
-	else
-		std::cout << PURPLE << this->_name << " jumps around trying to get "
-			"someone to high-five it." RESET << std::endl;
-	return ;
+// High five 요청
+void FragTrap::highFivesGuys(void) {
+    std::cout << "FragTrap " << _name << " requests a positive high five! ✋" << std::endl;
 }

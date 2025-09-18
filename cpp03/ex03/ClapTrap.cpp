@@ -3,143 +3,112 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 14:42:50 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/18 18:36:19 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/17 23:34:33 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/18 17:15:54 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
-#include "Colors.h"
-#include <iostream>
-#include <string>
 
-ClapTrap::ClapTrap(void)
-	: _name("Default"),
-	_hitPoints(CLAPTRAP_DEFAULT_HIT_POINTS),
-	_energyPoints(CLAPTRAP_DEFAULT_ENERGY_POINTS),
-	_attackDamage(CLAPTRAP_DEFAULT_ATTACK_DAMAGE),
-	_maxHitPoints(CLAPTRAP_DEFAULT_HIT_POINTS),
-	_maxEnergyPoints(CLAPTRAP_DEFAULT_ENERGY_POINTS),
-	_maxAttackDamage(CLAPTRAP_DEFAULT_ATTACK_DAMAGE) {
-	std::cerr << CYAN "ClapTrap default constructor called." RESET << std::endl;
-	return ;
+// 기본 생성자
+ClapTrap::ClapTrap() : _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+    std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name)
-	: _name(name),
-	_hitPoints(CLAPTRAP_DEFAULT_HIT_POINTS),
-	_energyPoints(CLAPTRAP_DEFAULT_ENERGY_POINTS),
-	_attackDamage(CLAPTRAP_DEFAULT_ATTACK_DAMAGE),
-	_maxHitPoints(CLAPTRAP_DEFAULT_HIT_POINTS),
-	_maxEnergyPoints(CLAPTRAP_DEFAULT_ENERGY_POINTS),
-	_maxAttackDamage(CLAPTRAP_DEFAULT_ATTACK_DAMAGE) {
-	std::cerr << CYAN "A ClapTrap named \"" << name << "\" was constructed." RESET << std::endl;
-	return ;
+// 매개변수 생성자
+ClapTrap::ClapTrap(const std::string& name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+    std::cout << "ClapTrap " << _name << " constructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(ClapTrap const & src) {
-	std::cerr << CYAN "ClapTrap copy constructor called." RESET << std::endl;
-	*this = src;
-	return ;
+// 복사 생성자
+ClapTrap::ClapTrap(const ClapTrap& other) {
+    std::cout << "ClapTrap copy constructor called" << std::endl;
+    *this = other;
 }
 
-ClapTrap::~ClapTrap(void) {
-	std::cerr << CYAN "The ClapTrap named \"" << this->_name << "\" was destroyed." RESET << std::endl;
-	return ;
+// 대입 연산자
+ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
+    std::cout << "ClapTrap assignment operator called" << std::endl;
+    if (this != &other) {
+        _name = other._name;
+        _hitPoints = other._hitPoints;
+        _energyPoints = other._energyPoints;
+        _attackDamage = other._attackDamage;
+    }
+    return *this;
 }
 
-ClapTrap &	ClapTrap::operator=(ClapTrap const & src) {
-	if (this != &src) {
-		this->_name = src.getName();
-		this->_hitPoints = src.getHitPoints();
-		this->_energyPoints = src.getEnergyPoints();
-		this->_attackDamage = src.getAttackDamage();
-	}
-	return (*this);
+// 소멸자
+ClapTrap::~ClapTrap() {
+    std::cout << "ClapTrap " << _name << " destructor called" << std::endl;
 }
 
-std::string	ClapTrap::getName(void) const {
-	return (this->_name);
+// 공격 함수
+void ClapTrap::attack(const std::string& target) {
+    if (_hitPoints == 0) {
+        std::cout << "ClapTrap " << _name << " is dead and cannot attack!" << std::endl;
+        return;
+    }
+    if (_energyPoints == 0) {
+        std::cout << "ClapTrap " << _name << " has no energy left to attack!" << std::endl;
+        return;
+    }
+    
+    _energyPoints--;
+    std::cout << "ClapTrap " << _name << " attacks " << target 
+              << ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 
-unsigned int	ClapTrap::getHitPoints(void) const {
-	return (this->_hitPoints);
+// 피해 받기 함수
+void ClapTrap::takeDamage(unsigned int amount) {
+    if (_hitPoints == 0) {
+        std::cout << "ClapTrap " << _name << " is already dead!" << std::endl;
+        return;
+    }
+    
+    if (amount >= _hitPoints) {
+        _hitPoints = 0;
+        std::cout << "ClapTrap " << _name << " takes " << amount 
+                  << " points of damage and is destroyed!" << std::endl;
+    } else {
+        _hitPoints -= amount;
+        std::cout << "ClapTrap " << _name << " takes " << amount 
+                  << " points of damage! Hit points: " << _hitPoints << std::endl;
+    }
 }
 
-unsigned int	ClapTrap::getEnergyPoints(void) const {
-	return (this->_energyPoints);
+// 수리 함수
+void ClapTrap::beRepaired(unsigned int amount) {
+    if (_hitPoints == 0) {
+        std::cout << "ClapTrap " << _name << " is dead and cannot be repaired!" << std::endl;
+        return;
+    }
+    if (_energyPoints == 0) {
+        std::cout << "ClapTrap " << _name << " has no energy left to repair!" << std::endl;
+        return;
+    }
+    
+    _energyPoints--;
+    _hitPoints += amount;
+    std::cout << "ClapTrap " << _name << " repairs itself for " << amount 
+              << " hit points! Current hit points: " << _hitPoints << std::endl;
 }
 
-unsigned int	ClapTrap::getAttackDamage(void) const {
-	return (this->_attackDamage);
+// getter 함수들
+std::string ClapTrap::getName() const {
+    return _name;
 }
 
-void	ClapTrap::attack(std::string & target) {
-	if (this->_hitPoints == 0) {
-		std::cout << YELLOW << this->_name
-			<< " can't attack: it is destroyed." RESET << std::endl;
-		return ;
-	}
-	if (this->_energyPoints == 0) {
-		std::cout << YELLOW << this->_name
-			<< " can't attack: its battery is depleted." RESET
-			<< std::endl;
-		return ;
-	}
-	if (target == this->_name)
-		target = "itself";
-	this->_energyPoints--;
-	std::cout << YELLOW << this->_name
-		<< " attacks " << target << " and hits for " << this->_attackDamage
-		<< " damage!" RESET << std::endl; 
+unsigned int ClapTrap::getHitPoints() const {
+    return _hitPoints;
 }
 
-void	ClapTrap::takeDamage(unsigned int amount) {
-	if (this->_hitPoints == 0) {
-		std::cout << RED << this->_name
-			<< " can't take anymore damage: it is already beyond repair!" RESET
-			<< std::endl;
-		return;
-	}
-	if ((int)this->_hitPoints - (int)amount <= 0) {
-		this->_hitPoints = 0;
-		std::cout << RED << this->_name
-			<< " takes " << amount << " damage and is destroyed!" RESET << std::endl;
-	}
-	else {
-		this->_hitPoints -= amount;
-		std::cout << RED << this->_name
-			<< " takes " << amount << " damage!" RESET << std::endl;
-	}
-	return ;
+unsigned int ClapTrap::getEnergyPoints() const {
+    return _energyPoints;
 }
 
-void	ClapTrap::beRepaired(unsigned int amount) {
-	if (this->_hitPoints == 0) {
-		std::cout << GREEN << this->_name
-			<< " can't repair itself: it is too severely damaged." RESET << std::endl;
-		return ;
-	}
-	if (this->_energyPoints == 0) {
-		std::cout << GREEN << this->_name
-			<< " can't repair itself: its battery is depleted and needs recharging."
-			RESET << std::endl;
-		return ;
-	}
-	if ((this->_hitPoints + amount) > this->_maxHitPoints)
-		amount = this->_maxHitPoints - this->_hitPoints;
-	if (amount == 0) {
-		this->_energyPoints--;
-		std::cout << GREEN << this->_name
-			<< " wastes energy trying to repair itself when it is already in tip top shape."
-			RESET << std::endl;
-		return ;
-	}
-	this->_energyPoints--;
-	this->_hitPoints += amount;
-	std::cout << GREEN << this->_name << " repairs itself for "
-		<< amount << "." RESET << std::endl;
-	return ;
+unsigned int ClapTrap::getAttackDamage() const {
+    return _attackDamage;
 }
