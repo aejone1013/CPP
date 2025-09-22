@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 12:16:55 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/14 14:18:10 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/22 16:07:09 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/22 16:07:42 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_CLASS_H
-# define ANIMAL_CLASS_H
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
-# include <string>
+#include <iostream>
+#include <string>
 
-class Animal
-{
-	public:
-		Animal(void);
-		Animal(Animal const & src);
-		Animal(std::string const & type);
-		virtual ~Animal(void);
+class Animal {
+protected:
+    std::string type;
 
-		Animal &	operator=(Animal const & src);
+public:
+    // Orthodox Canonical Form
+    Animal();
+    Animal(const Animal& other);
+    Animal& operator=(const Animal& other);
+    virtual ~Animal();
 
-		std::string const &	getType(void) const;
-		virtual void		makeSound(void) const;
-
-	protected:
-		std::string	_type;
+    // 다형성을 위한 virtual 함수들
+    virtual void makeSound() const;
+    std::string getType() const;
 };
 
 #endif

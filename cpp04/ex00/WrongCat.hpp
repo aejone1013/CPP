@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 12:17:32 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/14 16:53:26 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/22 16:10:40 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/22 16:16:44 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONG_CAT_CLASS_H
-# define WRONG_CAT_CLASS_H
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
-# include "WrongAnimal.hpp"
+#include "WrongAnimal.hpp"
 
-class WrongCat : public WrongAnimal
-{
-	public:
-		WrongCat(void);
-		WrongCat(WrongCat const & src);
-		~WrongCat(void);
+class WrongCat : public WrongAnimal {
+public:
+    // Orthodox Canonical Form
+    WrongCat();
+    WrongCat(const WrongCat& value);
+    WrongCat& operator=(const WrongCat& value);
+    ~WrongCat();
 
-		WrongCat &	operator=(WrongCat const & src);
-
-		void	makeSound(void) const;
+    // virtual 키워드 없음 - 오버라이드 안 됨
+    void makeSound() const;
 };
 
 #endif

@@ -11,6 +11,8 @@ cpp03
     ex02 done
     ex03 done
 cpp04
+    ex00 done
+    ex01 doing
 cpp05
 cpp06
 cpp07

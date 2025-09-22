@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 12:17:44 by mcombeau          #+#    #+#             */
-/*   Updated: 2022/12/14 14:16:12 by mcombeau         ###   ########.fr       */
+/*   Created: 2025/06/22 16:08:14 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/22 16:30:34 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOG_CLASS_H
-# define DOG_CLASS_H
+#ifndef DOG_HPP
+# define DOG_HPP
 
-# include "Animal.hpp"
+#include "Animal.hpp"
 
-class Dog : public Animal
-{
-	public:
-		Dog(void);
-		Dog(Dog const & src);
-		~Dog(void);
+class Dog : public Animal {
+public:
+    // Orthodox Canonical Form
+    Dog();
+    Dog(const Dog& value);
+    Dog& operator=(const Dog& value);
+    ~Dog();
 
-		Dog &	operator=(Dog const & src);
-
-		void	makeSound(void) const;
+    // 오버라이드된 함수
+    void makeSound() const;
 };
 
 #endif
