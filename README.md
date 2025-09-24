@@ -1,5 +1,5 @@
 cpp00 finished
-cpp01 git pushed
+cpp01 수정 중 (ex02, ex04 수정 필요)
 cpp02
     ex00 done
     ex01 done

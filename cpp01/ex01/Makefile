@@ -1,37 +1,22 @@
-NAME	= zombie
+NAME = zombie
 
-CC		= c++
-CFLAGS	= -Werror -Wextra -Wall -std=c++98
+CC = c++
+CCFLAGS = -Wall -Wextra -Werror -std=c++98
 
-INC_PATH	= ./includes/
-INC			= -I $(INC_PATH)
+SRCS = Zombie.cpp zombieHorde.cpp main.cpp
+OBJS = $(SRCS:.cpp=.o)
 
-SRC_PATH	= ./srcs/
-SRC			=	Zombie.cpp \
-				zombieHorde.cpp \
-				main.cpp			
-SRCS		= $(addprefix $(SRC_PATH), $(SRC))
-
-OBJ_PATH	= ./objs/
-OBJS		= $(addprefix $(OBJ_PATH), $(SRC:.cpp=.o))
-
-all: $(OBJ_PATH) $(NAME)
-
-$(OBJ_PATH):
-	mkdir -p $(OBJ_PATH)
-
-$(OBJ_PATH)%.o: $(SRC_PATH)%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $@ $(INC)
+	$(CC) $(CCFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf $(OBJ_PATH)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all re clean fclean
+.PHONY: all clean fclean re
