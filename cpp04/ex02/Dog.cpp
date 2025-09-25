@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/22 17:06:15 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/23 14:59:50 by jaoh             ###   ########.fr       */
+/*   Created: 2025/06/23 14:49:48 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/23 15:08:19 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@
 Dog::Dog() : Animal() {
     type = "Dog";
     brain = new Brain();  // new로 Brain 생성
-    ideaIndex = 0;
     std::cout << "Dog constructor called" << std::endl;
 }
 
 // 복사 생성자 (깊은 복사)
 Dog::Dog(const Dog& other) : Animal(other) {
     brain = new Brain(*other.brain);  // 새로운 Brain을 복사 생성
-    ideaIndex = other.ideaIndex;
     std::cout << "Dog copy constructor called" << std::endl;
 }
 
@@ -34,7 +32,6 @@ Dog& Dog::operator=(const Dog& other) {
         Animal::operator=(other);
         delete brain;  // 기존 Brain 삭제
         brain = new Brain(*other.brain);  // 새로운 Brain 복사 생성
-        ideaIndex = other.ideaIndex;
     }
     return *this;
 }
@@ -45,7 +42,7 @@ Dog::~Dog() {
     std::cout << "Dog destructor called" << std::endl;
 }
 
-// makeSound 오버라이드
+// makeSound 구현 (순수 가상 함수)
 void Dog::makeSound() const {
     std::cout << "Woof! Woof!" << std::endl;
 }
@@ -61,15 +58,4 @@ void Dog::setBrainIdea(int index, const std::string& idea) {
 
 std::string Dog::getBrainIdea(int index) const {
     return brain->getIdea(index);
-}
-
-void Dog::createIdea(const std::string& idea) {
-    if (ideaIndex < 0 || ideaIndex >= 100)
-        ideaIndex = 0;
-    brain->setIdea(ideaIndex, idea);
-    ideaIndex = (ideaIndex + 1) % 100;
-}
-
-std::string Dog::getIdea(int index) const {
-    return getBrainIdea(index);
 }

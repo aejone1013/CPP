@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/22 17:06:41 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/23 14:59:50 by jaoh             ###   ########.fr       */
+/*   Created: 2025/06/23 14:49:35 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/23 15:06:38 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef BRAIN_HPP
+# define BRAIN_HPP
 
-#include "Animal.hpp"
-#include "Brain.hpp"
+#include <iostream>
+#include <string>
 
-class Cat : public Animal {
+class Brain {
 private:
-    Brain* brain;  // Brain 포인터
+    std::string ideas[100];  // 100개의 아이디어 배열
 
 public:
     // Orthodox Canonical Form
-    Cat();
-    Cat(const Cat& other);
-    Cat& operator=(const Cat& other);
-    ~Cat();
+    Brain();
+    Brain(const Brain& other);
+    Brain& operator=(const Brain& other);
+    ~Brain();
 
-    // 오버라이드된 함수
-    void makeSound() const;
-    
-    // Brain 관련 함수들
-    Brain* getBrain() const;
-    void setBrainIdea(int index, const std::string& idea);
-    std::string getBrainIdea(int index) const;
+    // 유틸리티 함수들
+    void setIdea(int index, const std::string& idea);
+    std::string getIdea(int index) const;
+    void printIdeas() const;
 };
 
 #endif

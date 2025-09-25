@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 14:56:03 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/23 14:56:09 by jaoh             ###   ########.fr       */
+/*   Created: 2025/06/23 14:49:21 by jaoh              #+#    #+#             */
+/*   Updated: 2025/09/23 15:06:00 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ Animal& Animal::operator=(const Animal& other) {
 // 소멸자 (virtual)
 Animal::~Animal() {
     std::cout << "Animal destructor called" << std::endl;
-}
-
-// makeSound (virtual)
-void Animal::makeSound() const {
-    std::cout << "Animal makes some generic sound" << std::endl;
 }
 
 // getType
