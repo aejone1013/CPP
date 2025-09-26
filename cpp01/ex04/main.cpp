@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:04:55 by jaoh              #+#    #+#             */
-/*   Updated: 2025/06/29 19:11:39 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/09/26 17:37:07 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,21 @@ int main(int ac, char **av)
 	}
 
 	std::string	currentLine;
-	std::string	newLine;
-	size_t		occurences = 0;
 	
 	while (std::getline(inputFile, currentLine))
 	{
-		size_t index;
-		newLine = currentLine;
-		while (to_replace != "" && (index = newLine.find(to_replace)) != std::string::npos)
+		if (to_replace.empty())
 		{
-			occurences++;
-			newLine = newLine.substr(index + to_replace.size());
+			outputFile << currentLine << std::endl;
+			continue;
 		}
-		while ((to_replace != "" && (index = currentLine.find(to_replace)) != std::string::npos) && occurences)
+		
+		size_t startPos = 0;
+		while ((startPos = currentLine.find(to_replace, startPos)) != std::string::npos)
 		{
-			newLine = currentLine.substr(0, index);
-			newLine += with;
-			newLine += currentLine.substr(index + to_replace.size());
-			currentLine = newLine;
-			occurences--;
+			currentLine = currentLine.substr(0, startPos) + with + 
+						 currentLine.substr(startPos + to_replace.length());
+			startPos += with.length();
 		}
 		outputFile << currentLine << std::endl;
 	}
