@@ -6,12 +6,12 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:57:58 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/15 15:59:05 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/09/29 17:34:02 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_CLASS_H
-# define FIXED_CLASS_H
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
 #include <iostream>
 
