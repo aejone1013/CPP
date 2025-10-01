@@ -1,7 +1,7 @@
-NAME = diamondtrap
+NAME	= diamondtrap
 
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wno-shadow
+CC = c++
+CCFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
@@ -9,7 +9,7 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CCFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

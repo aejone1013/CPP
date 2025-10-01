@@ -6,10 +6,11 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:07:00 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/16 15:08:34 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/10/01 16:00:52 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ClapTrap.hpp"
 
 // 기본 생성자
 ClapTrap::ClapTrap() : _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
