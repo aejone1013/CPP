@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 17:07:40 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/22 17:08:49 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/10/04 15:20:02 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ int main() {
 	std::cout << "Idea 2: [" << d->getIdea(1) << "] in Dog's brain" << std::endl;
 	std::cout << "Idea 3: [" << d->getIdea(2) << "] in Dog's brain" << std::endl;
 	std::cout << "Idea 4: [" << d->getIdea(3) << "] in Dog's brain" << std::endl;
+	
+	// Cat 클래스 테스트 추가
+	Cat* c = new Cat();
+	std::cout << "-------------Set Ideas to Cat's Brain--------------" << std::endl;
+	c->createIdea("I love tuna!");
+	c->createIdea("Sleeping is the best!");
+	c->createIdea("I'm a cat!");
+	std::cout << "Idea 1: [" << c->getIdea(0) << "] in Cat's brain" << std::endl;
+	std::cout << "Idea 2: [" << c->getIdea(1) << "] in Cat's brain" << std::endl;
+	std::cout << "Idea 3: [" << c->getIdea(2) << "] in Cat's brain" << std::endl;
 	std::cout << "-------------Check Copy of Brain--------------" << std::endl;
 	Dog	e(*d);
 	// e = *d;
@@ -53,6 +63,7 @@ int main() {
 	delete i;
 	delete j;
 	delete d;
+	delete c;  // Cat 객체 삭제 추가
 	delete f;
 	std::cout << "--------------Array of Animals------------------" << std::endl;
 	Animal	*herd[4];

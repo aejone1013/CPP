@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 16:10:19 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/22 16:16:33 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/10/04 15:19:44 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // 기본 생성자
 WrongAnimal::WrongAnimal() : type("WrongAnimal") {
-    std::cout << "WrongAnimal default constructor called" << std::endl;
+    std::cout << "WrongAnimal constructor called" << std::endl;
 }
 
 // 복사 생성자
