@@ -4,10 +4,7 @@ cpp02 need to push
 cpp03 done
 cpp04 done
 cpp05 done
-cpp06
-    ex00
-    ex01
-    ex02 doing
+cpp06 done
 cpp07 done
 cpp08 
     ex00 done
