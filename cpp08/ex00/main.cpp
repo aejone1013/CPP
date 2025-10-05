@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:10:36 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/05 16:10:42 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/10/05 16:18:07 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <vector>
 #include <list>
 #include <deque>
+#include <iterator>
 #include "easyfind.hpp"
 
 int main() {

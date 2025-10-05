@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:11:24 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/05 16:11:32 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/10/05 16:18:07 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <vector>
 #include <exception>
 #include <algorithm>
+#include <iterator>
 
 class Span {
 private:
@@ -36,10 +37,13 @@ public:
     // 범위 추가 (iterator 사용)
     template <typename Iterator>
     void addRange(Iterator begin, Iterator end) {
-        while (begin != end) {
-            addNumber(*begin);
-            ++begin;
+        // 입력 구간 크기 계산 후 한 번에 용량 검증
+        const std::size_t distanceToAdd = static_cast<std::size_t>(std::distance(begin, end));
+        if (_numbers.size() + distanceToAdd > _maxSize) {
+            throw FullException();
         }
+        // 일괄 삽입으로 성능 향상
+        _numbers.insert(_numbers.end(), begin, end);
     }
 
     // span 계산

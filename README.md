@@ -6,8 +6,5 @@ cpp04 done
 cpp05 done
 cpp06 done
 cpp07 done
-cpp08 
-    ex00 done
-    ex01 done
-    ex02 done
+cpp08 done
 cpp09
