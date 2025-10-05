@@ -6,12 +6,13 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 15:50:01 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/05 15:50:16 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/10/05 16:00:50 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
+#include <cctype>
 #include "iter.hpp"
 
 // 테스트용 함수들
