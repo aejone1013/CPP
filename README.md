@@ -9,5 +9,5 @@ cpp07 done
 cpp08 
     ex00 done
     ex01 done
-    ex02 doing
+    ex02 done
 cpp09
