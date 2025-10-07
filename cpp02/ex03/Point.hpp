@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:00:26 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/29 17:33:46 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/10/07 11:13:29 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,19 @@
 
 class Point {
 private:
-    const Fixed _x;  // x 좌표 (상수)
-    const Fixed _y;  // y 좌표 (상수)
+    const Fixed _x;
+    const Fixed _y;
 
 public:
-    // Orthodox Canonical Form
-    Point();                              // 기본 생성자 (0, 0)
-    Point(const float x, const float y);  // float 매개변수 생성자
-    Point(const Point& other);           // 복사 생성자
-    Point& operator=(const Point& other); // 대입 연산자
-    ~Point();                            // 소멸자
+    Point();
+    Point(const float x, const float y);
+    Point(const Point& other);
+    Point& operator=(const Point& other);
+    ~Point();
 
-    // getter 함수들
     Fixed getX() const;
     Fixed getY() const;
 };
-
-// BSP 함수 선언
 bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif
