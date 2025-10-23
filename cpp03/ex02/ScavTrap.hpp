@@ -18,17 +18,17 @@
 class ScavTrap : public ClapTrap {
 public:
     // Orthodox Canonical Form
-    ScavTrap();                                    // 기본 생성자
-    ScavTrap(const std::string& name);            // 매개변수 생성자
-    ScavTrap(const ScavTrap& other);              // 복사 생성자
-    ScavTrap& operator=(const ScavTrap& other);   // 대입 연산자
-    ~ScavTrap();                                  // 소멸자
+    ScavTrap();                                    // Default constructor
+    ScavTrap(const std::string& name);            // Parameterized constructor
+    ScavTrap(const ScavTrap& other);              // Copy constructor
+    ScavTrap& operator=(const ScavTrap& other);   // Assignment operator
+    ~ScavTrap();                                  // Destructor
 
-    // 오버라이드된 함수
-    void attack(const std::string& target);       // 다른 메시지로 공격
+    // Overridden functions
+    void attack(const std::string& target);       // Attack with a different message
 
-    // ScavTrap 고유 기능
-    void guardGate();                             // Gate keeper 모드
+    // ScavTrap specific features
+    void guardGate();                             // Gatekeeper mode
 };
 
 #endif

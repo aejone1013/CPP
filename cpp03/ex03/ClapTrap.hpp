@@ -17,26 +17,26 @@
 #include <string>
 
 class ClapTrap {
-protected:  // private에서 protected로 변경 (상속을 위해)
-    std::string _name;        // 이름 (생성자 매개변수로 전달)
-    unsigned int _hitPoints;  // 체력
-    unsigned int _energyPoints; // 에너지
-    unsigned int _attackDamage; // 공격력
+protected:  // changed from private to protected (for inheritance)
+    std::string _name;        // Name (passed to constructor)
+    unsigned int _hitPoints;  // Hit points
+    unsigned int _energyPoints; // Energy points
+    unsigned int _attackDamage; // Attack damage
 
 public:
     // Orthodox Canonical Form
-    ClapTrap();                                    // 기본 생성자
-    ClapTrap(const std::string& name);            // 매개변수 생성자
-    ClapTrap(const ClapTrap& other);              // 복사 생성자
-    ClapTrap& operator=(const ClapTrap& other);   // 대입 연산자
-    ~ClapTrap();                                  // 소멸자
+    ClapTrap();                                    // Default constructor
+    ClapTrap(const std::string& name);            // Parameterized constructor
+    ClapTrap(const ClapTrap& other);              // Copy constructor
+    ClapTrap& operator=(const ClapTrap& other);   // Assignment operator
+    ~ClapTrap();                                  // Destructor
 
-    // 멤버 함수들
-    void attack(const std::string& target);       // 공격
-    void takeDamage(unsigned int amount);         // 피해 받기
-    void beRepaired(unsigned int amount);         // 수리하기
+    // Member functions
+    void attack(const std::string& target);       // Attack
+    void takeDamage(unsigned int amount);         // Take damage
+    void beRepaired(unsigned int amount);         // Repair
 
-    // getter 함수들
+    // Getter functions
     std::string getName() const;
     unsigned int getHitPoints() const;
     unsigned int getEnergyPoints() const;

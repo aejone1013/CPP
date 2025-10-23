@@ -18,35 +18,35 @@
 int main() {
     std::cout << "=== DiamondTrap Multiple Inheritance Tests ===" << std::endl;
     
-    // DiamondTrap 생성자 체이닝 테스트
+    // DiamondTrap constructor chaining test
     std::cout << "\n--- DiamondTrap Constructor Chaining Test ---" << std::endl;
     DiamondTrap diamond("Hybrid");
     
-    // DiamondTrap 상태 확인
+    // DiamondTrap status check
     std::cout << "\n--- DiamondTrap Status ---" << std::endl;
     std::cout << diamond.getName() << " - HP: " << diamond.getHitPoints() 
               << ", Energy: " << diamond.getEnergyPoints() 
               << ", Attack: " << diamond.getAttackDamage() << std::endl;
     
-    // whoAmI 테스트
+    // whoAmI test
     std::cout << "\n--- whoAmI Test ---" << std::endl;
     diamond.whoAmI();
     
-    // 공격 테스트 (ScavTrap의 attack 사용)
+    // Attack test (uses ScavTrap's attack)
     std::cout << "\n--- Attack Test (ScavTrap's attack) ---" << std::endl;
     diamond.attack("Target");
     
-    // 각 부모 클래스의 특수 능력 테스트
+    // Test special abilities from each parent class
     std::cout << "\n--- Special Abilities from Parents ---" << std::endl;
-    diamond.guardGate();      // ScavTrap에서
-    diamond.highFivesGuys();  // FragTrap에서
+    diamond.guardGate();      // from ScavTrap
+    diamond.highFivesGuys();  // from FragTrap
     
-    // 일반적인 ClapTrap 기능들
+    // Basic ClapTrap functions
     std::cout << "\n--- Basic ClapTrap Functions ---" << std::endl;
     diamond.takeDamage(30);
     diamond.beRepaired(20);
     
-    // 복사 테스트
+    // Copy tests
     std::cout << "\n--- Copy Tests ---" << std::endl;
     DiamondTrap diamond2(diamond);
     DiamondTrap diamond3;
@@ -55,7 +55,7 @@ int main() {
     diamond2.whoAmI();
     diamond3.whoAmI();
     
-    // 모든 타입들의 비교
+    // Compare all robot types
     std::cout << "\n--- All Robot Types Comparison ---" << std::endl;
     ClapTrap clap("BasicBot");
     ScavTrap scav("GuardBot");
@@ -78,14 +78,14 @@ int main() {
               << ", Energy=" << dia.getEnergyPoints() 
               << ", Attack=" << dia.getAttackDamage() << std::endl;
     
-    // 각각의 공격 스타일
+    // Attack style comparison
     std::cout << "\n--- Attack Style Comparison ---" << std::endl;
     clap.attack("Enemy");
     scav.attack("Enemy");
     frag.attack("Enemy");
-    dia.attack("Enemy");     // ScavTrap의 attack 사용
+    dia.attack("Enemy");     // Uses ScavTrap's attack
     
-    // 모든 특수 능력들
+    // All special abilities
     std::cout << "\n--- All Special Abilities ---" << std::endl;
     scav.guardGate();
     frag.highFivesGuys();
@@ -93,7 +93,7 @@ int main() {
     dia.highFivesGuys();
     dia.whoAmI();
     
-    // 소멸자 체이닝 테스트
+    // Destructor chaining test
     std::cout << "\n--- Destructor Chaining Test ---" << std::endl;
     
     return 0;

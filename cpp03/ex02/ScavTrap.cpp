@@ -12,28 +12,28 @@
 
 #include "ScavTrap.hpp"
 
-// 기본 생성자
+// Default constructor
 ScavTrap::ScavTrap() : ClapTrap() {
-    _hitPoints = 100;   // ScavTrap 기본값
+    _hitPoints = 100;   // ScavTrap default value
     _energyPoints = 50;
     _attackDamage = 20;
     std::cout << "ScavTrap default constructor called" << std::endl;
 }
 
-// 매개변수 생성자
+// Parameterized constructor
 ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name) {
-    _hitPoints = 100;   // ScavTrap 기본값
+    _hitPoints = 100;   // ScavTrap default value
     _energyPoints = 50;
     _attackDamage = 20;
     std::cout << "ScavTrap " << _name << " constructor called" << std::endl;
 }
 
-// 복사 생성자
+// Copy constructor
 ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
     std::cout << "ScavTrap copy constructor called" << std::endl;
 }
 
-// 대입 연산자
+// Assignment operator
 ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
     std::cout << "ScavTrap assignment operator called" << std::endl;
     if (this != &other) {
@@ -42,12 +42,12 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
     return *this;
 }
 
-// 소멸자
+// Destructor
 ScavTrap::~ScavTrap() {
     std::cout << "ScavTrap " << _name << " destructor called" << std::endl;
 }
 
-// 오버라이드된 공격 함수 (다른 메시지)
+// Overridden attack function (different message)
 void ScavTrap::attack(const std::string& target) {
     if (_hitPoints == 0) {
         std::cout << "ScavTrap " << _name << " is dead and cannot attack!" << std::endl;
@@ -63,7 +63,7 @@ void ScavTrap::attack(const std::string& target) {
               << ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 
-// Gate keeper 모드
+// Gatekeeper mode
 void ScavTrap::guardGate() {
     std::cout << "ScavTrap " << _name << " is now in Gate keeper mode!" << std::endl;
 }

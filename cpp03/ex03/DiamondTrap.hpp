@@ -18,20 +18,20 @@
 
 class DiamondTrap : public FragTrap, public ScavTrap {
 private:
-    std::string _name;  // DiamondTrap 자체의 이름 (ClapTrap::_name과 같은 변수명)
+    std::string _name;  // DiamondTrap's own name (same variable name as ClapTrap::_name)
 
 public:
     // Orthodox Canonical Form
-    DiamondTrap();                                      // 기본 생성자
-    DiamondTrap(const std::string& name);              // 매개변수 생성자
-    DiamondTrap(const DiamondTrap& other);             // 복사 생성자
-    DiamondTrap& operator=(const DiamondTrap& other);  // 대입 연산자
-    ~DiamondTrap();                                    // 소멸자
+    DiamondTrap();                                      // Default constructor
+    DiamondTrap(const std::string& name);              // Parameterized constructor
+    DiamondTrap(const DiamondTrap& other);             // Copy constructor
+    DiamondTrap& operator=(const DiamondTrap& other);  // Assignment operator
+    ~DiamondTrap();                                    // Destructor
 
-    // DiamondTrap 고유 기능
-    void whoAmI();                                     // 이름들 출력
+    // DiamondTrap specific features
+    void whoAmI();                                     // Print names
 
-    // using 선언으로 어떤 attack을 사용할지 명시 (ScavTrap의 attack 사용)
+    // Use 'using' declaration to specify which attack to use (ScavTrap's attack)
     using ScavTrap::attack;
 };
 

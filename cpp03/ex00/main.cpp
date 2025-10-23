@@ -15,46 +15,46 @@
 int main() {
     std::cout << "=== ClapTrap Tests ===" << std::endl;
     
-    // 생성자 테스트
+    // Constructor tests
     std::cout << "\n--- Constructor Tests ---" << std::endl;
     ClapTrap clap1("Robot1");
     ClapTrap clap2("Robot2");
     
-    // 상태 확인
+    // Initial status
     std::cout << "\n--- Initial Status ---" << std::endl;
     std::cout << clap1.getName() << " - HP: " << clap1.getHitPoints() 
               << ", Energy: " << clap1.getEnergyPoints() 
               << ", Attack: " << clap1.getAttackDamage() << std::endl;
     
-    // 공격 테스트
+    // Attack tests
     std::cout << "\n--- Attack Tests ---" << std::endl;
     clap1.attack("Enemy");
     clap1.attack("Target");
     
-    // 피해 테스트
+    // Damage tests
     std::cout << "\n--- Damage Tests ---" << std::endl;
     clap1.takeDamage(3);
     clap1.takeDamage(5);
     
-    // 수리 테스트
+    // Repair tests
     std::cout << "\n--- Repair Tests ---" << std::endl;
     clap1.beRepaired(4);
     clap1.beRepaired(2);
     
-    // 에너지 소진 테스트
+    // Energy depletion test
     std::cout << "\n--- Energy Depletion Test ---" << std::endl;
     for (int i = 0; i < 10; i++) {
         clap2.attack("DummyTarget");
     }
-    clap2.attack("ShouldFail"); // 에너지 부족으로 실패해야 함
+    clap2.attack("ShouldFail"); // Should fail due to lack of energy
     
-    // 죽음 테스트
+    // Death test
     std::cout << "\n--- Death Test ---" << std::endl;
-    clap2.takeDamage(100); // 체력 0으로 만들기
-    clap2.attack("ShouldFail"); // 죽었으므로 공격 불가
-    clap2.beRepaired(5); // 죽었으므로 수리 불가
+    clap2.takeDamage(100); // Reduce hit points to 0
+    clap2.attack("ShouldFail"); // Cannot attack because it's dead
+    clap2.beRepaired(5); // Cannot repair because it's dead
     
-    // 복사 테스트
+    // Copy tests
     std::cout << "\n--- Copy Tests ---" << std::endl;
     ClapTrap clap3(clap1);
     ClapTrap clap4;

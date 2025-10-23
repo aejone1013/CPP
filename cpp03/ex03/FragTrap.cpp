@@ -12,28 +12,28 @@
 
 #include "FragTrap.hpp"
 
-// 기본 생성자
+// Default constructor
 FragTrap::FragTrap() : ClapTrap() {
-    _hitPoints = 100;   // FragTrap 기본값
+    _hitPoints = 100;   // FragTrap default value
     _energyPoints = 100;
     _attackDamage = 30;
     std::cout << "FragTrap default constructor called" << std::endl;
 }
 
-// 매개변수 생성자
+// Parameterized constructor
 FragTrap::FragTrap(const std::string& name) : ClapTrap(name) {
-    _hitPoints = 100;   // FragTrap 기본값
+    _hitPoints = 100;   // FragTrap default value
     _energyPoints = 100;
     _attackDamage = 30;
     std::cout << "FragTrap " << _name << " constructor called" << std::endl;
 }
 
-// 복사 생성자
+// Copy constructor
 FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other) {
     std::cout << "FragTrap copy constructor called" << std::endl;
 }
 
-// 대입 연산자
+// Assignment operator
 FragTrap& FragTrap::operator=(const FragTrap& other) {
     std::cout << "FragTrap assignment operator called" << std::endl;
     if (this != &other) {
@@ -42,12 +42,12 @@ FragTrap& FragTrap::operator=(const FragTrap& other) {
     return *this;
 }
 
-// 소멸자
+// Destructor
 FragTrap::~FragTrap() {
     std::cout << "FragTrap " << _name << " destructor called" << std::endl;
 }
 
-// High five 요청
+// Request a high five
 void FragTrap::highFivesGuys(void) {
     std::cout << "FragTrap " << _name << " requests a positive high five! ✋" << std::endl;
 }

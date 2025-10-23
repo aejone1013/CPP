@@ -18,14 +18,14 @@
 class FragTrap : public ClapTrap {
 public:
     // Orthodox Canonical Form
-    FragTrap();                                    // 기본 생성자
-    FragTrap(const std::string& name);            // 매개변수 생성자
-    FragTrap(const FragTrap& other);              // 복사 생성자
-    FragTrap& operator=(const FragTrap& other);   // 대입 연산자
-    ~FragTrap();                                  // 소멸자
+    FragTrap();                                    // Default constructor
+    FragTrap(const std::string& name);            // Parameterized constructor
+    FragTrap(const FragTrap& other);              // Copy constructor
+    FragTrap& operator=(const FragTrap& other);   // Assignment operator
+    ~FragTrap();                                  // Destructor
 
-    // FragTrap 고유 기능
-    void highFivesGuys(void);                     // High five 요청
+    // FragTrap specific features
+    void highFivesGuys(void);                     // Request a high five
 };
 
 #endif

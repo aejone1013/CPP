@@ -16,37 +16,37 @@
 int main() {
     std::cout << "=== ScavTrap Inheritance Tests ===" << std::endl;
     
-    // 생성자 체이닝 테스트
+    // Constructor chaining test
     std::cout << "\n--- Constructor Chaining Test ---" << std::endl;
     ScavTrap scav1("Guardian");
     
-    // ScavTrap 능력 테스트
+    // ScavTrap capability test
     std::cout << "\n--- ScavTrap Status ---" << std::endl;
     std::cout << scav1.getName() << " - HP: " << scav1.getHitPoints() 
               << ", Energy: " << scav1.getEnergyPoints() 
               << ", Attack: " << scav1.getAttackDamage() << std::endl;
     
-    // 공격 테스트 (오버라이드된 함수)
+    // Attack tests (overridden function)
     std::cout << "\n--- Attack Tests ---" << std::endl;
     scav1.attack("Intruder");
     scav1.attack("Enemy");
     
-    // 피해와 수리 테스트 (상속된 함수)
+    // Damage and repair tests (inherited functions)
     std::cout << "\n--- Damage and Repair Tests ---" << std::endl;
     scav1.takeDamage(30);
     scav1.beRepaired(20);
     
-    // ScavTrap 고유 기능 테스트
+    // ScavTrap specific feature test
     std::cout << "\n--- Special Ability Test ---" << std::endl;
     scav1.guardGate();
     
-    // 복사 테스트
+    // Copy tests
     std::cout << "\n--- Copy Tests ---" << std::endl;
     ScavTrap scav2(scav1);
     ScavTrap scav3;
     scav3 = scav1;
     
-    // ClapTrap과 비교 테스트
+    // Comparison test with ClapTrap
     std::cout << "\n--- ClapTrap vs ScavTrap Comparison ---" << std::endl;
     ClapTrap clap("WeakBot");
     ScavTrap scav("StrongBot");
@@ -62,7 +62,7 @@ int main() {
     clap.attack("Target");
     scav.attack("Target");
     
-    // 소멸자 체이닝 테스트
+    // Destructor chaining test
     std::cout << "\n--- Destructor Chaining Test ---" << std::endl;
     
     return 0;

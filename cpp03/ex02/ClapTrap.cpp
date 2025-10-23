@@ -12,23 +12,23 @@
 
 #include "ClapTrap.hpp"
 
-// 기본 생성자
+// Default constructor
 ClapTrap::ClapTrap() : _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
     std::cout << "ClapTrap default constructor called" << std::endl;
 }
 
-// 매개변수 생성자
+// Parameterized constructor
 ClapTrap::ClapTrap(const std::string& name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
     std::cout << "ClapTrap " << _name << " constructor called" << std::endl;
 }
 
-// 복사 생성자
+// Copy constructor
 ClapTrap::ClapTrap(const ClapTrap& other) {
     std::cout << "ClapTrap copy constructor called" << std::endl;
     *this = other;
 }
 
-// 대입 연산자
+// Assignment operator
 ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
     std::cout << "ClapTrap assignment operator called" << std::endl;
     if (this != &other) {
@@ -40,12 +40,12 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
     return *this;
 }
 
-// 소멸자
+// Destructor
 ClapTrap::~ClapTrap() {
     std::cout << "ClapTrap " << _name << " destructor called" << std::endl;
 }
 
-// 공격 함수
+// Attack function
 void ClapTrap::attack(const std::string& target) {
     if (_hitPoints == 0) {
         std::cout << "ClapTrap " << _name << " is dead and cannot attack!" << std::endl;
@@ -61,7 +61,7 @@ void ClapTrap::attack(const std::string& target) {
               << ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 
-// 피해 받기 함수
+// Take damage function
 void ClapTrap::takeDamage(unsigned int amount) {
     if (_hitPoints == 0) {
         std::cout << "ClapTrap " << _name << " is already dead!" << std::endl;
@@ -79,7 +79,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
     }
 }
 
-// 수리 함수
+// Repair function
 void ClapTrap::beRepaired(unsigned int amount) {
     if (_hitPoints == 0) {
         std::cout << "ClapTrap " << _name << " is dead and cannot be repaired!" << std::endl;
@@ -96,7 +96,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
               << " hit points! Current hit points: " << _hitPoints << std::endl;
 }
 
-// getter 함수들
+// Getter functions
 std::string ClapTrap::getName() const {
     return _name;
 }
