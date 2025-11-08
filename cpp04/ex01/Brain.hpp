@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 17:05:18 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/22 17:05:49 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/11/08 14:39:27 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@
 
 class Brain {
 private:
-    std::string ideas[100];  // 100개의 아이디어 배열
+    std::string ideas[100];
 
 public:
-    // Orthodox Canonical Form
     Brain();
     Brain(const Brain& other);
     Brain& operator=(const Brain& other);
     ~Brain();
 
-    // 유틸리티 함수들
     void setIdea(int index, const std::string& idea);
     std::string getIdea(int index) const;
     void printIdeas() const;

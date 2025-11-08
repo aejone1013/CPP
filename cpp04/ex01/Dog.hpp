@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 17:06:04 by jaoh              #+#    #+#             */
-/*   Updated: 2025/09/23 15:01:38 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/11/08 14:43:40 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,21 @@
 
 class Dog : public Animal {
 private:
-    Brain* brain;  // Brain 포인터
-    int ideaIndex; // 다음으로 저장할 아이디어 인덱스 (0~99 순환)
+    Brain* brain;
+    int ideaIndex;
 
 public:
-    // Orthodox Canonical Form
     Dog();
     Dog(const Dog& other);
     Dog& operator=(const Dog& other);
     ~Dog();
 
-    // 오버라이드된 함수
     void makeSound() const;
     
-    // Brain 관련 함수들
     Brain* getBrain() const;
     void setBrainIdea(int index, const std::string& idea);
     std::string getBrainIdea(int index) const;
 
-    // main에서 사용하는 편의 함수들
     void createIdea(const std::string& idea);
     std::string getIdea(int index) const;
 };

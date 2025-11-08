@@ -6,51 +6,45 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 17:07:07 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/04 15:19:44 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/11/08 14:43:40 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-// 기본 생성자
 Cat::Cat() : Animal() {
     type = "Cat";
-    brain = new Brain();  // new로 Brain 생성
+    brain = new Brain();
     ideaIndex = 0;
     std::cout << "Cat constructor called" << std::endl;
 }
 
-// 복사 생성자 (깊은 복사)
 Cat::Cat(const Cat& other) : Animal(other) {
-    brain = new Brain(*other.brain);  // 새로운 Brain을 복사 생성
+    brain = new Brain(*other.brain);
     ideaIndex = other.ideaIndex;
     std::cout << "Cat copy constructor called" << std::endl;
 }
 
-// 대입 연산자 (깊은 복사)
 Cat& Cat::operator=(const Cat& other) {
     std::cout << "Cat assignment operator called" << std::endl;
     if (this != &other) {
         Animal::operator=(other);
-        delete brain;  // 기존 Brain 삭제
-        brain = new Brain(*other.brain);  // 새로운 Brain 복사 생성
+        delete brain;
+        brain = new Brain(*other.brain);
         ideaIndex = other.ideaIndex;
     }
     return *this;
 }
 
-// 소멸자
 Cat::~Cat() {
-    delete brain;  // Brain 메모리 해제
+    delete brain;
     std::cout << "Cat destructor called" << std::endl;
 }
 
-// makeSound 오버라이드
 void Cat::makeSound() const {
     std::cout << "Meow! Meow!" << std::endl;
 }
 
-// Brain 관련 함수들
 Brain* Cat::getBrain() const {
     return brain;
 }
