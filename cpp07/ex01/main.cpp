@@ -120,7 +120,7 @@ int main(void) {
     
     // 빈 배열 테스트
     std::cout << "\n--- Empty Array Test ---" << std::endl;
-    int emptyArray[0];
+    int emptyArray[] = {0};
     iter(emptyArray, 0, printElement<int>);
     std::cout << "(empty array - no output)" << std::endl;
     

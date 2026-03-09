@@ -158,9 +158,10 @@ void ScalarConverter::convertFromDouble(double d) {
         std::cout << "int: " << static_cast<int>(d) << std::endl;
     }
     
-    // float 변환
-    std::cout << "float: " << static_cast<float>(d);
-    if (isWholeNumber(static_cast<float>(d))) std::cout << ".0";
+    // float 출력
+    float f = static_cast<float>(d);
+    std::cout << "float: " << f;
+    if (isWholeNumber(f)) std::cout << ".0";
     std::cout << "f" << std::endl;
 
     // double 출력
@@ -202,8 +203,8 @@ void ScalarConverter::convert(const std::string& literal) {
     
     // int 타입
     if (isInt(literal)) {
-        long long temp = std::atoll(literal.c_str());
-        if (temp < std::numeric_limits<int>::min() || 
+        double temp = std::atof(literal.c_str());
+        if (temp < std::numeric_limits<int>::min() ||
             temp > std::numeric_limits<int>::max()) {
             std::cout << "char: impossible" << std::endl;
             std::cout << "int: impossible" << std::endl;
