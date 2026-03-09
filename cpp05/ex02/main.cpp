@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:00:37 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/04 16:00:49 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/11/12 15:11:18 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main() {
         std::cout << robot << std::endl;
         alice.signForm(robot);
         alice.executeForm(robot);
-        alice.executeForm(robot);  // 다시 실행 (50% 확률)
+        alice.executeForm(robot);
     }
     catch (std::exception& e) {
         std::cout << "Exception: " << e.what() << std::endl;
@@ -63,7 +63,7 @@ int main() {
         Bureaucrat boss("Boss", 1);
         ShrubberyCreationForm unsigned_form("garden");
         
-        boss.executeForm(unsigned_form);  // 서명 안 됨 - 실패
+        boss.executeForm(unsigned_form);
     }
     catch (std::exception& e) {
         std::cout << "Exception: " << e.what() << std::endl;
@@ -75,8 +75,8 @@ int main() {
         Bureaucrat highGrade("HighGrade", 1);
         RobotomyRequestForm form("Target");
         
-        highGrade.signForm(form);  // 서명 성공
-        lowGrade.executeForm(form);  // 실행 권한 없음 - 실패
+        highGrade.signForm(form);
+        lowGrade.executeForm(form);
     }
     catch (std::exception& e) {
         std::cout << "Exception: " << e.what() << std::endl;

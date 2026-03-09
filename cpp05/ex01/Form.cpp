@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:46:35 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/04 15:47:33 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/11/12 15:11:18 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ Form::Form(const Form& other)
 Form& Form::operator=(const Form& other) {
     if (this != &other) {
         _signed = other._signed;
-        // const 멤버는 변경 불가
     }
     return *this;
 }

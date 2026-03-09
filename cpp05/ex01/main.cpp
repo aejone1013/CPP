@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:46:40 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/04 15:47:46 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/11/12 15:11:18 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int main() {
     std::cout << "=== Form and Signing Tests ===" << std::endl;
     
-    // 정상적인 Form 생성
     std::cout << "\n--- Normal Form Creation ---" << std::endl;
     try {
         Form taxForm("Tax Form", 50, 25);
@@ -29,7 +28,6 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl;
     }
     
-    // 잘못된 등급으로 Form 생성
     std::cout << "\n--- Invalid Form Creation ---" << std::endl;
     try {
         Form invalidForm("Invalid", 0, 50);
@@ -45,7 +43,6 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl;
     }
     
-    // 서명 테스트
     std::cout << "\n--- Signing Tests ---" << std::endl;
     try {
         Form form("Important Document", 50, 25);
@@ -55,12 +52,10 @@ int main() {
         std::cout << "\nBefore signing:" << std::endl;
         std::cout << form << std::endl;
         
-        // 등급이 충분한 관료가 서명
         std::cout << "\nHigh rank bureaucrat trying to sign:" << std::endl;
         highRank.signForm(form);
         std::cout << form << std::endl;
         
-        // 이미 서명된 폼에 다시 서명 시도
         std::cout << "\nTrying to sign again:" << std::endl;
         highRank.signForm(form);
     }
@@ -68,7 +63,6 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl;
     }
     
-    // 등급 부족 테스트
     std::cout << "\n--- Insufficient Grade Test ---" << std::endl;
     try {
         Form secretForm("Top Secret", 10, 5);
@@ -77,7 +71,6 @@ int main() {
         std::cout << secretForm << std::endl;
         std::cout << lowRank << std::endl;
         
-        // 등급이 부족한 관료가 서명 시도
         lowRank.signForm(secretForm);
         std::cout << secretForm << std::endl;
     }
@@ -85,7 +78,6 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl;
     }
     
-    // 복합 테스트
     std::cout << "\n--- Multiple Bureaucrats and Forms ---" << std::endl;
     try {
         Form form1("Form A", 75, 50);
@@ -116,7 +108,6 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl;
     }
     
-    // 등급 경계 테스트
     std::cout << "\n--- Grade Boundary Test ---" << std::endl;
     try {
         Form boundaryForm("Boundary Form", 50, 25);
@@ -125,10 +116,10 @@ int main() {
         
         std::cout << boundaryForm << std::endl;
         
-        exactly50.signForm(boundaryForm);  // 정확히 50 - 성공
+        exactly50.signForm(boundaryForm);
         
         Form anotherForm("Another", 50, 25);
-        just51.signForm(anotherForm);  // 51 - 실패
+        just51.signForm(anotherForm);
     }
     catch (std::exception& e) {
         std::cout << "Exception: " << e.what() << std::endl;

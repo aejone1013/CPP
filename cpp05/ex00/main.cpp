@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:44:44 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/04 15:44:51 by jaoh             ###   ########.fr       */
+/*   Updated: 2025/11/12 15:11:18 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int main() {
     std::cout << "=== Bureaucrat Exception Tests ===" << std::endl;
     
-    // 정상적인 Bureaucrat 생성
     std::cout << "\n--- Normal Bureaucrat Creation ---" << std::endl;
     try {
         Bureaucrat bob("Bob", 75);
@@ -31,7 +30,6 @@ int main() {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
     
-    // 너무 높은 등급으로 생성 시도
     std::cout << "\n--- Too High Grade Test ---" << std::endl;
     try {
         Bureaucrat invalid("Invalid", 0);
@@ -41,7 +39,6 @@ int main() {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
     
-    // 너무 낮은 등급으로 생성 시도
     std::cout << "\n--- Too Low Grade Test ---" << std::endl;
     try {
         Bureaucrat invalid("Invalid", 151);
@@ -51,45 +48,42 @@ int main() {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
     
-    // 등급 증가 테스트
     std::cout << "\n--- Increment Grade Test ---" << std::endl;
     try {
         Bureaucrat worker("Worker", 3);
         std::cout << worker << std::endl;
         
-        worker.incrementGrade();  // 3 -> 2
+        worker.incrementGrade();
         std::cout << worker << std::endl;
         
-        worker.incrementGrade();  // 2 -> 1
+        worker.incrementGrade();
         std::cout << worker << std::endl;
         
-        worker.incrementGrade();  // 1 -> 0 (예외 발생!)
+        worker.incrementGrade();
         std::cout << worker << std::endl;
     }
     catch (std::exception& e) {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
     
-    // 등급 감소 테스트
     std::cout << "\n--- Decrement Grade Test ---" << std::endl;
     try {
         Bureaucrat intern("Intern", 148);
         std::cout << intern << std::endl;
         
-        intern.decrementGrade();  // 148 -> 149
+        intern.decrementGrade();
         std::cout << intern << std::endl;
         
-        intern.decrementGrade();  // 149 -> 150
+        intern.decrementGrade();
         std::cout << intern << std::endl;
         
-        intern.decrementGrade();  // 150 -> 151 (예외 발생!)
+        intern.decrementGrade();
         std::cout << intern << std::endl;
     }
     catch (std::exception& e) {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
     
-    // 복합 테스트
     std::cout << "\n--- Complex Test ---" << std::endl;
     try {
         Bureaucrat manager("Manager", 50);
@@ -109,7 +103,6 @@ int main() {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
     
-    // 복사 테스트
     std::cout << "\n--- Copy Test ---" << std::endl;
     try {
         Bureaucrat original("Original", 42);
@@ -127,7 +120,6 @@ int main() {
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
     
-    // 다중 예외 처리 테스트
     std::cout << "\n--- Multiple Exception Handling ---" << std::endl;
     try {
         Bureaucrat high("High", 1);
@@ -136,7 +128,7 @@ int main() {
         std::cout << high << std::endl;
         std::cout << low << std::endl;
         
-        high.incrementGrade();  // 예외 발생
+        high.incrementGrade();
     }
     catch (Bureaucrat::GradeTooHighException& e) {
         std::cout << "Specific exception caught: " << e.what() << std::endl;
