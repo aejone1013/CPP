@@ -67,9 +67,10 @@ bool BitcoinExchange::isValidDate(const std::string& date) const {
         if (!std::isdigit(static_cast<unsigned char>(date[i])))
             return false;
     }
-    int year = std::atoi(date.substr(0, 4).c_str());
-    int month = std::atoi(date.substr(5, 2).c_str());
-    int day = std::atoi(date.substr(8, 2).c_str());
+    int year  = (date[0]-'0')*1000 + (date[1]-'0')*100
+              + (date[2]-'0')*10  + (date[3]-'0');
+    int month = (date[5]-'0')*10 + (date[6]-'0');
+    int day   = (date[8]-'0')*10 + (date[9]-'0');
     if (year < 1000 || year > 9999)
         return false;
     if (month < 1 || month > 12)
@@ -94,7 +95,7 @@ bool BitcoinExchange::isValidDate(const std::string& date) const {
 }
 
 bool BitcoinExchange::isValidValue(double value) const {
-    return value >= 0 && value <= 1000;
+    return value <= 1000;
 }
 
 // CSV 파일(예: data.csv)을 읽어 날짜-가격 맵을 구성
@@ -131,18 +132,14 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
 
 // 정확한 날짜가 없으면 바로 이전 날짜의 환율을 사용
 double BitcoinExchange::getRate(const std::string& date) const {
-    std::map<std::string, double>::const_iterator it = _database.find(date);
-    
-    if (it != _database.end()) {
+    std::map<std::string, double>::const_iterator it = _database.lower_bound(date);
+
+    if (it != _database.end() && it->first == date)
         return it->second;
-    }
-    
-    it = _database.lower_bound(date);
-    
-    if (it == _database.begin()) {
+
+    if (it == _database.begin())
         throw std::runtime_error("No data available for this date");
-    }
-    
+
     --it;
     return it->second;
 }

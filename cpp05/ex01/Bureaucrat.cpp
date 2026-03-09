@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 15:46:16 by jaoh              #+#    #+#             */
-/*   Updated: 2025/11/12 15:11:18 by jaoh             ###   ########.fr       */
+/*   Updated: 2026/03/09 15:44:10 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,21 @@ void Bureaucrat::validateGrade(int grade) {
     if (grade > 150) throw GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {
-    std::cout << "Bureaucrat default constructor called" << std::endl;
-}
+Bureaucrat::Bureaucrat() : _name("Default"), _grade(150) {}
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name) {
     validateGrade(grade);
     _grade = grade;
-    std::cout << "Bureaucrat " << _name << " created" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {
-    std::cout << "Bureaucrat copy constructor called" << std::endl;
-}
+Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-    if (this != &other) {
-        _grade = other._grade;
-    }
+    if (this != &other) _grade = other._grade;
     return *this;
 }
 
-Bureaucrat::~Bureaucrat() {
-    std::cout << "Bureaucrat " << _name << " destroyed" << std::endl;
-}
+Bureaucrat::~Bureaucrat() {}
 
 const std::string& Bureaucrat::getName() const {
     return _name;

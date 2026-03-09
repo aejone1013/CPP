@@ -1,0 +1,57 @@
+# 오브젝트 파일
+*.o
+
+# cpp05 ShrubberyCreationForm 출력 파일
+*_shrubbery
+
+# cpp00
+megaphone
+phonebook
+GBU
+
+# cpp01
+zombie
+ptrref
+harl
+sed_for_losers
+unnecessary_violence
+harlFilter
+
+# cpp02
+fixed
+bsp
+
+# cpp03
+claptrap
+scavtrap
+fragtrap
+diamondtrap
+
+# cpp04
+animal
+brain
+abstract
+materia
+
+# cpp05
+bureaucrat
+form
+
+# cpp06
+convert
+serialize
+identify
+
+# cpp07
+whatever
+iter
+array
+
+# cpp08
+easyfind
+span
+mutantstack
+
+# cpp09
+btc
+RPN

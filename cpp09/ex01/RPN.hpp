@@ -14,13 +14,10 @@
 # define RPN_HPP
 
 #include <string>
-#include <stack>
 #include <exception>
 
 class RPN {
 private:
-    std::stack<int> _stack;
-    
     bool isOperator(char c) const;
     bool isDigit(char c) const;
     int performOperation(int a, int b, char op) const;

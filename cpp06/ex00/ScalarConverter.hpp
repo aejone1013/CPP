@@ -34,6 +34,8 @@ private:
     static bool isFloat(const std::string& str);
     static bool isDouble(const std::string& str);
     static bool isPseudoLiteral(const std::string& str);
+    static bool isDecimalDigits(const std::string& s, size_t start, size_t end);
+    static bool isWholeNumber(double value);
 
     // 변환 헬퍼
     static void convertFromChar(char c);

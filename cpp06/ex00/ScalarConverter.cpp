@@ -41,47 +41,37 @@ bool ScalarConverter::isInt(const std::string& str) {
     return true;
 }
 
-// float 타입인지 확인
-bool ScalarConverter::isFloat(const std::string& str) {
-    if (str.length() < 2 || str[str.length() - 1] != 'f') return false;
-    
-    std::string withoutF = str.substr(0, str.length() - 1);
+// 부호 뒤 숫자+소수점 하나를 검증하는 공통 헬퍼
+bool ScalarConverter::isDecimalDigits(const std::string& s, size_t start, size_t end) {
     size_t dotCount = 0;
-    size_t start = 0;
-    
-    if (withoutF[0] == '+' || withoutF[0] == '-') start = 1;
-    if (start >= withoutF.length()) return false;
-    
-    for (size_t i = start; i < withoutF.length(); i++) {
-        if (withoutF[i] == '.') {
-            dotCount++;
-            if (dotCount > 1) return false;
-        } else if (!std::isdigit(withoutF[i])) {
+    if (start >= end) return false;
+    for (size_t i = start; i < end; i++) {
+        if (s[i] == '.') {
+            if (++dotCount > 1) return false;
+        } else if (!std::isdigit(s[i])) {
             return false;
         }
     }
     return dotCount == 1;
 }
 
+// 정수값 여부 확인 (NaN/Inf/범위 초과 안전하게 처리)
+bool ScalarConverter::isWholeNumber(double value) {
+    return !std::isnan(value) && !std::isinf(value) && std::fmod(value, 1.0) == 0.0;
+}
+
+// float 타입인지 확인
+bool ScalarConverter::isFloat(const std::string& str) {
+    if (str.length() < 2 || str[str.length() - 1] != 'f') return false;
+    size_t start = (str[0] == '+' || str[0] == '-') ? 1 : 0;
+    return isDecimalDigits(str, start, str.length() - 1);
+}
+
 // double 타입인지 확인
 bool ScalarConverter::isDouble(const std::string& str) {
     if (str.empty()) return false;
-    
-    size_t dotCount = 0;
-    size_t start = 0;
-    
-    if (str[0] == '+' || str[0] == '-') start = 1;
-    if (start >= str.length()) return false;
-    
-    for (size_t i = start; i < str.length(); i++) {
-        if (str[i] == '.') {
-            dotCount++;
-            if (dotCount > 1) return false;
-        } else if (!std::isdigit(str[i])) {
-            return false;
-        }
-    }
-    return dotCount == 1;
+    size_t start = (str[0] == '+' || str[0] == '-') ? 1 : 0;
+    return isDecimalDigits(str, start, str.length());
 }
 
 // pseudo-literal인지 확인
@@ -139,16 +129,12 @@ void ScalarConverter::convertFromFloat(float f) {
     
     // float 출력
     std::cout << "float: " << f;
-    if (f == static_cast<int>(f) && !std::isnan(f) && !std::isinf(f)) {
-        std::cout << ".0";
-    }
+    if (isWholeNumber(f)) std::cout << ".0";
     std::cout << "f" << std::endl;
-    
+
     // double 변환
     std::cout << "double: " << static_cast<double>(f);
-    if (f == static_cast<int>(f) && !std::isnan(f) && !std::isinf(f)) {
-        std::cout << ".0";
-    }
+    if (isWholeNumber(static_cast<double>(f))) std::cout << ".0";
     std::cout << std::endl;
 }
 
@@ -174,16 +160,12 @@ void ScalarConverter::convertFromDouble(double d) {
     
     // float 변환
     std::cout << "float: " << static_cast<float>(d);
-    if (d == static_cast<int>(d) && !std::isnan(d) && !std::isinf(d)) {
-        std::cout << ".0";
-    }
+    if (isWholeNumber(static_cast<float>(d))) std::cout << ".0";
     std::cout << "f" << std::endl;
-    
+
     // double 출력
     std::cout << "double: " << d;
-    if (d == static_cast<int>(d) && !std::isnan(d) && !std::isinf(d)) {
-        std::cout << ".0";
-    }
+    if (isWholeNumber(d)) std::cout << ".0";
     std::cout << std::endl;
 }
 

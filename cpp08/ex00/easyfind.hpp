@@ -16,7 +16,6 @@
 #include <algorithm>
 #include <exception>
 
-// 찾지 못했을 때 던질 예외
 class NotFoundException : public std::exception {
 public:
     virtual const char* what() const throw() {
@@ -24,27 +23,19 @@ public:
     }
 };
 
-// easyfind 템플릿 함수
 template <typename T>
 typename T::iterator easyfind(T& container, int value) {
     typename T::iterator it = std::find(container.begin(), container.end(), value);
-    
-    if (it == container.end()) {
+    if (it == container.end())
         throw NotFoundException();
-    }
-    
     return it;
 }
 
-// const 컨테이너 지원 오버로드
 template <typename T>
 typename T::const_iterator easyfind(T const& container, int value) {
     typename T::const_iterator it = std::find(container.begin(), container.end(), value);
-    
-    if (it == container.end()) {
+    if (it == container.end())
         throw NotFoundException();
-    }
-    
     return it;
 }
 
