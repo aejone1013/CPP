@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 15:45:09 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/05 15:49:38 by jaoh             ###   ########.fr       */
+/*   Created: 2025/10/08 16:00:00 by jaoh              #+#    #+#             */
+/*   Updated: 2025/10/08 16:00:00 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#include "PmergeMe.hpp"
+#include <iostream>
 
-template <typename T>
-void swap(T& a, T& b) {
-    T temp = a;
-    a = b;
-    b = temp;
+int main(int argc, char** argv) {
+	if (argc < 2) {
+		std::cerr << "Error" << std::endl;
+		return 1;
+	}
+
+	try {
+		PmergeMe sorter;
+		sorter.run(argc, argv);
+	}
+	catch (std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+
+	return 0;
 }
-
-template <typename T>
-T const & min(T const & a, T const & b) {
-    return (a < b) ? a : b;
-}
-
-template <typename T>
-T const & max(T const & a, T const & b) {
-    return (a > b) ? a : b;
-}
-
-#endif

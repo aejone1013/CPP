@@ -20,7 +20,6 @@
 int main() {
     std::cout << "=== EasyFind Tests ===" << std::endl;
     
-    // vector 테스트
     std::cout << "\n--- Vector Test ---" << std::endl;
     std::vector<int> vec;
     vec.push_back(1);
@@ -44,7 +43,6 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl;
     }
     
-    // list 테스트
     std::cout << "\n--- List Test ---" << std::endl;
     std::list<int> lst;
     lst.push_back(10);
@@ -67,7 +65,6 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl;
     }
     
-    // deque 테스트
     std::cout << "\n--- Deque Test ---" << std::endl;
     std::deque<int> deq;
     deq.push_back(100);
@@ -82,7 +79,6 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl;
     }
     
-    // 빈 컨테이너 테스트
     std::cout << "\n--- Empty Container Test ---" << std::endl;
     std::vector<int> emptyVec;
     
@@ -93,7 +89,6 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl;
     }
     
-    // 첫 번째 발견 테스트 (중복 값)
     std::cout << "\n--- First Occurrence Test ---" << std::endl;
     std::vector<int> dupVec;
     dupVec.push_back(5);

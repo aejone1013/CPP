@@ -17,7 +17,6 @@
 int main() {
     std::cout << "=== Serialization Tests ===" << std::endl;
     
-    // Data 객체 생성
     Data originalData;
     originalData.name = "Test Data";
     originalData.value = 42;
@@ -29,18 +28,15 @@ int main() {
     std::cout << "Value: " << originalData.value << std::endl;
     std::cout << "Price: " << originalData.price << std::endl;
     
-    // Serialize: Data* -> uintptr_t
     std::cout << "\n--- Serialization ---" << std::endl;
     uintptr_t serialized = Serializer::serialize(&originalData);
     std::cout << "Serialized value: " << serialized << std::endl;
     std::cout << "Serialized hex: 0x" << std::hex << serialized << std::dec << std::endl;
     
-    // Deserialize: uintptr_t -> Data*
     std::cout << "\n--- Deserialization ---" << std::endl;
     Data* deserializedPtr = Serializer::deserialize(serialized);
     std::cout << "Deserialized address: " << deserializedPtr << std::endl;
     
-    // 비교: 원본 포인터와 역직렬화된 포인터
     std::cout << "\n--- Comparison ---" << std::endl;
     if (deserializedPtr == &originalData) {
         std::cout << "✓ Success: Pointers are equal!" << std::endl;
@@ -48,13 +44,11 @@ int main() {
         std::cout << "✗ Failure: Pointers are different!" << std::endl;
     }
     
-    // 역직렬화된 포인터로 데이터 접근
     std::cout << "\n--- Deserialized Data Access ---" << std::endl;
     std::cout << "Name: " << deserializedPtr->name << std::endl;
     std::cout << "Value: " << deserializedPtr->value << std::endl;
     std::cout << "Price: " << deserializedPtr->price << std::endl;
     
-    // 데이터 수정 테스트
     std::cout << "\n--- Modification Test ---" << std::endl;
     deserializedPtr->value = 100;
     std::cout << "Modified value through deserialized pointer: " 
@@ -65,7 +59,6 @@ int main() {
         std::cout << "✓ Both values changed (same object)" << std::endl;
     }
     
-    // 추가 테스트: 여러 Data 객체
     std::cout << "\n--- Multiple Objects Test ---" << std::endl;
     Data data1, data2, data3;
     data1.name = "First";

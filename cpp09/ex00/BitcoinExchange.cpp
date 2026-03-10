@@ -17,6 +17,11 @@
 #include <cstdlib>
 #include <cctype>
 
+namespace {
+    const char* kDatabaseHeader = "date,exchange_rate";
+    const char* kInputHeader = "date | value";
+}
+
 BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & other) : _database(other._database) {}
@@ -55,7 +60,6 @@ double BitcoinExchange::stringToDouble(const std::string& str) const {
     return value;
 }
 
-// 날짜 형식과 합리적 범위를 검증(윤년/월별 일수 간략 검증)
 bool BitcoinExchange::isValidDate(const std::string& date) const {
     if (date.length() != 10)
         return false;
@@ -98,7 +102,6 @@ bool BitcoinExchange::isValidValue(double value) const {
     return value <= 1000;
 }
 
-// CSV 파일(예: data.csv)을 읽어 날짜-가격 맵을 구성
 void BitcoinExchange::loadDatabase(const std::string& filename) {
     std::ifstream file(filename.c_str());
     
@@ -107,7 +110,9 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
     }
     
     std::string line;
-    std::getline(file, line); // 첫 줄 헤더 스킵
+    if (!std::getline(file, line) || trim(line) != kDatabaseHeader) {
+        throw std::runtime_error("Error: invalid database header.");
+    }
     
     while (std::getline(file, line)) {
         size_t pos = line.find(',');
@@ -119,10 +124,9 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
         
         try {
             double value = stringToDouble(valueStr);
-            _database[date] = value; // 동일 날짜가 여러 번 나오면 마지막 값으로 덮어씀
+            _database[date] = value;
         }
         catch (...) {
-            // 숫자 파싱 실패는 무시하고 다음 라인 처리
             continue;
         }
     }
@@ -130,7 +134,6 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
     file.close();
 }
 
-// 정확한 날짜가 없으면 바로 이전 날짜의 환율을 사용
 double BitcoinExchange::getRate(const std::string& date) const {
     std::map<std::string, double>::const_iterator it = _database.lower_bound(date);
 
@@ -153,7 +156,10 @@ void BitcoinExchange::processInputFile(const std::string& filename) {
     }
     
     std::string line;
-    std::getline(file, line); // 첫 줄 헤더 스킵
+    if (!std::getline(file, line) || trim(line) != kInputHeader) {
+        std::cerr << "Error: bad input => " << line << std::endl;
+        return;
+    }
     
     while (std::getline(file, line)) {
         size_t pos = line.find('|');
@@ -193,7 +199,6 @@ void BitcoinExchange::processInputFile(const std::string& filename) {
         try {
             double rate = getRate(date);
             double result = value * rate;
-            // 형식: "YYYY-MM-DD => value = 결과"
             std::cout << date << " => " << value << " = " << result << std::endl;
         }
         catch (std::exception& e) {

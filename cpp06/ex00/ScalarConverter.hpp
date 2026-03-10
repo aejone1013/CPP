@@ -22,13 +22,11 @@
 
 class ScalarConverter {
 private:
-    // 인스턴스화 방지
     ScalarConverter();
     ScalarConverter(const ScalarConverter& other);
     ScalarConverter& operator=(const ScalarConverter& other);
     ~ScalarConverter();
 
-    // 타입 감지 헬퍼
     static bool isChar(const std::string& str);
     static bool isInt(const std::string& str);
     static bool isFloat(const std::string& str);
@@ -37,7 +35,6 @@ private:
     static bool isDecimalDigits(const std::string& s, size_t start, size_t end);
     static bool isWholeNumber(double value);
 
-    // 변환 헬퍼
     static void convertFromChar(char c);
     static void convertFromInt(int n);
     static void convertFromFloat(float f);
@@ -45,7 +42,6 @@ private:
     static void handlePseudoLiteral(const std::string& str);
 
 public:
-    // 유일한 public 메서드
     static void convert(const std::string& literal);
 };
 

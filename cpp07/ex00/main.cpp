@@ -17,7 +17,6 @@
 int main(void) {
     std::cout << "=== Template Functions Tests ===" << std::endl;
     
-    // 주어진 테스트 코드
     std::cout << "\n--- Given Test Code ---" << std::endl;
     int a = 2;
     int b = 3;
@@ -35,10 +34,8 @@ int main(void) {
     std::cout << "min(c, d) = " << ::min(c, d) << std::endl;
     std::cout << "max(c, d) = " << ::max(c, d) << std::endl;
     
-    // 추가 테스트들
     std::cout << "\n--- Additional Tests ---" << std::endl;
     
-    // float 테스트
     std::cout << "\nFloat test:" << std::endl;
     float f1 = 3.14f;
     float f2 = 2.71f;
@@ -48,14 +45,12 @@ int main(void) {
     std::cout << "min(f1, f2) = " << ::min(f1, f2) << std::endl;
     std::cout << "max(f1, f2) = " << ::max(f1, f2) << std::endl;
     
-    // double 테스트
     std::cout << "\nDouble test:" << std::endl;
     double d1 = 42.42;
     double d2 = 21.21;
     std::cout << "min(d1, d2) = " << ::min(d1, d2) << std::endl;
     std::cout << "max(d1, d2) = " << ::max(d1, d2) << std::endl;
     
-    // char 테스트
     std::cout << "\nChar test:" << std::endl;
     char ch1 = 'a';
     char ch2 = 'z';
@@ -65,7 +60,6 @@ int main(void) {
     std::cout << "min(ch1, ch2) = " << ::min(ch1, ch2) << std::endl;
     std::cout << "max(ch1, ch2) = " << ::max(ch1, ch2) << std::endl;
     
-    // 같은 값 테스트 (min/max는 두 번째 값 반환)
     std::cout << "\nEqual values test:" << std::endl;
     int e1 = 5;
     int e2 = 5;
@@ -75,7 +69,6 @@ int main(void) {
     std::cout << "max(e1, e2) returns second: " << &::max(e1, e2) 
               << " (e2 address: " << &e2 << ")" << std::endl;
     
-    // 레퍼런스 반환 확인
     std::cout << "\nReference return test:" << std::endl;
     int x = 10;
     int y = 20;

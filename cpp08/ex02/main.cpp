@@ -17,7 +17,6 @@
 int main() {
     std::cout << "=== MutantStack Tests ===" << std::endl;
     
-    // 주어진 테스트 코드
     std::cout << "\n--- Given Test Code ---" << std::endl;
     MutantStack<int> mstack;
     
@@ -48,7 +47,6 @@ int main() {
     
     std::stack<int> s(mstack);
     
-    // list로 동일한 테스트
     std::cout << "\n--- Same Test with std::list ---" << std::endl;
     std::list<int> lst;
     
@@ -77,10 +75,8 @@ int main() {
         ++lit;
     }
     
-    // 추가 테스트들
     std::cout << "\n--- Additional Tests ---" << std::endl;
     
-    // 복사 테스트
     std::cout << "\nCopy test:" << std::endl;
     MutantStack<int> mstack2;
     mstack2.push(1);
@@ -101,7 +97,6 @@ int main() {
     }
     std::cout << std::endl;
     
-    // reverse iterator 테스트
     std::cout << "\nReverse iterator test:" << std::endl;
     MutantStack<int> mstack4;
     mstack4.push(10);
@@ -121,7 +116,6 @@ int main() {
     }
     std::cout << std::endl;
     
-    // string 테스트
     std::cout << "\nString test:" << std::endl;
     MutantStack<std::string> strStack;
     strStack.push("Hello");
@@ -134,7 +128,6 @@ int main() {
     }
     std::cout << std::endl;
     
-    // const iterator 테스트
     std::cout << "\nConst iterator test:" << std::endl;
     MutantStack<int> const constStack(mstack4);
     
@@ -144,7 +137,6 @@ int main() {
     }
     std::cout << std::endl;
     
-    // 빈 스택 테스트
     std::cout << "\nEmpty stack test:" << std::endl;
     MutantStack<int> emptyStack;
     std::cout << "Empty stack size: " << emptyStack.size() << std::endl;

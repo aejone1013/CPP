@@ -18,17 +18,14 @@
 
 class Serializer {
 private:
-    // 인스턴스화 방지
     Serializer();
     Serializer(const Serializer& other);
     Serializer& operator=(const Serializer& other);
     ~Serializer();
 
 public:
-    // 포인터를 uintptr_t로 변환
     static uintptr_t serialize(Data* ptr);
     
-    // uintptr_t를 포인터로 변환
     static Data* deserialize(uintptr_t raw);
 };
 

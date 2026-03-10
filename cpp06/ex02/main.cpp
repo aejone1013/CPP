@@ -20,7 +20,6 @@
 int main() {
     std::cout << "=== Type Identification Tests ===" << std::endl;
     
-    // 랜덤 생성 테스트
     std::cout << "\n--- Random Generation Test ---" << std::endl;
     for (int i = 0; i < 5; i++) {
         Base* random = generate();
@@ -32,7 +31,6 @@ int main() {
         std::cout << std::endl;
     }
     
-    // 각 타입별 직접 테스트
     std::cout << "\n--- Direct Type Test ---" << std::endl;
     
     std::cout << "Testing A:" << std::endl;
@@ -59,7 +57,6 @@ int main() {
     identify(*c);
     delete c;
     
-    // Base 포인터로 저장된 타입 식별
     std::cout << "\n--- Base Pointer Identification ---" << std::endl;
     Base* baseA = new A();
     Base* baseB = new B();
@@ -76,7 +73,6 @@ int main() {
     delete baseB;
     delete baseC;
     
-    // 배열 테스트
     std::cout << "\n--- Array Test ---" << std::endl;
     Base* array[6];
     array[0] = new A();
@@ -95,7 +91,6 @@ int main() {
         delete array[i];
     }
     
-    // NULL 포인터 테스트
     std::cout << "\n--- NULL Pointer Test ---" << std::endl;
     Base* nullPtr = NULL;
     identify(nullPtr);

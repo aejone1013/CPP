@@ -19,7 +19,6 @@
 template <typename T>
 class MutantStack : public std::stack<T> {
 public:
-    // Orthodox Canonical Form
     MutantStack() : std::stack<T>() {}
     
     MutantStack(MutantStack const & other) : std::stack<T>(other) {}
@@ -33,15 +32,11 @@ public:
     
     ~MutantStack() {}
 
-    // iterator 타입 정의
-    // std::stack은 내부적으로 std::deque를 사용 (기본 컨테이너)
-    // c는 protected 멤버로 실제 컨테이너를 가리킴
     typedef typename std::stack<T>::container_type::iterator iterator;
     typedef typename std::stack<T>::container_type::const_iterator const_iterator;
     typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
     typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
 
-    // iterator 반환 함수들
     iterator begin() {
         return this->c.begin();
     }
