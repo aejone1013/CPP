@@ -13,7 +13,6 @@
 #ifndef WHATEVER_HPP
 # define WHATEVER_HPP
 
-// swap 템플릿 함수 - 두 값을 교환
 template <typename T>
 void swap(T& a, T& b) {
     T temp = a;
@@ -21,13 +20,11 @@ void swap(T& a, T& b) {
     b = temp;
 }
 
-// min 템플릿 함수 - 두 값 중 작은 값 반환 (같으면 두 번째 값 반환)
 template <typename T>
 T const & min(T const & a, T const & b) {
     return (a < b) ? a : b;
 }
 
-// max 템플릿 함수 - 두 값 중 큰 값 반환 (같으면 두 번째 값 반환)
 template <typename T>
 T const & max(T const & a, T const & b) {
     return (a > b) ? a : b;
