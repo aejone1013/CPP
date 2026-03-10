@@ -20,6 +20,7 @@
 namespace {
     const char* kDatabaseHeader = "date,exchange_rate";
     const char* kInputHeader = "date | value";
+    const char* kInputHeaderCompact = "date|value";
 }
 
 BitcoinExchange::BitcoinExchange() {}
@@ -156,7 +157,8 @@ void BitcoinExchange::processInputFile(const std::string& filename) {
     }
     
     std::string line;
-    if (!std::getline(file, line) || trim(line) != kInputHeader) {
+    if (!std::getline(file, line) ||
+        (trim(line) != kInputHeader && trim(line) != kInputHeaderCompact)) {
         std::cerr << "Error: bad input => " << line << std::endl;
         return;
     }

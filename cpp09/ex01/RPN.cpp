@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 
 #include "RPN.hpp"
-#include <sstream>
 #include <iostream>
 #include <cstdlib>
 #include <stack>
+#include <cctype>
 
 RPN::RPN() {}
 
@@ -44,29 +44,21 @@ int RPN::performOperation(int a, int b, char op) const {
         case '*':
             return a * b;
         case '/':
-            if (b == 0) {
-                throw std::runtime_error("Error: division by zero");
-            }
+            if (b == 0)
+                throw std::runtime_error("Error");
             return a / b;
         default:
-            throw std::runtime_error("Error: invalid operator");
+            throw std::runtime_error("Error");
     }
 }
 
 int RPN::calculate(const std::string& expression) {
     std::stack<int> stack;
-    std::istringstream iss(expression);
-    std::string token;
 
-    while (iss >> token) {
-        if (token.length() != 1)
-            throw std::runtime_error("Error");
-
-        char c = token[0];
-
-        if (c == '(' || c == ')')
-            throw std::runtime_error("Error");
-
+    for (size_t i = 0; i < expression.length(); i++) {
+        char c = expression[i];
+        if (std::isspace(static_cast<unsigned char>(c)))
+            continue;
         if (isDigit(c)) {
             stack.push(c - '0');
         } else if (isOperator(c)) {

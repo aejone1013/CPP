@@ -29,13 +29,10 @@ Base* generate(void) {
     
     switch (random) {
         case 0:
-            std::cout << "[Generated type A]" << std::endl;
             return new A();
         case 1:
-            std::cout << "[Generated type B]" << std::endl;
             return new B();
         case 2:
-            std::cout << "[Generated type C]" << std::endl;
             return new C();
         default:
             return NULL;

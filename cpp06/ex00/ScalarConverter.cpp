@@ -12,6 +12,15 @@
 
 #include "ScalarConverter.hpp"
 
+namespace {
+    void printImpossible() {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: impossible" << std::endl;
+        std::cout << "double: impossible" << std::endl;
+    }
+}
+
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::ScalarConverter(const ScalarConverter& other) { (void)other; }
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) { 
@@ -186,10 +195,7 @@ void ScalarConverter::convert(const std::string& literal) {
         long long temp = std::atoll(literal.c_str());
         if (temp < std::numeric_limits<int>::min() || 
             temp > std::numeric_limits<int>::max()) {
-            std::cout << "char: impossible" << std::endl;
-            std::cout << "int: impossible" << std::endl;
-            std::cout << "float: impossible" << std::endl;
-            std::cout << "double: impossible" << std::endl;
+            printImpossible();
             return;
         }
         convertFromInt(static_cast<int>(temp));
@@ -208,5 +214,5 @@ void ScalarConverter::convert(const std::string& literal) {
         return;
     }
     
-    std::cout << "Error: Invalid literal" << std::endl;
+    printImpossible();
 }

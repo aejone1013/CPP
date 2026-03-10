@@ -48,7 +48,7 @@ void PmergeMe::parseInput(int argc, char** argv) {
 			throw std::runtime_error("Error");
 		errno = 0;
 		long val = std::strtol(arg.c_str(), NULL, 10);
-		if (errno == ERANGE || val < 0 || val > INT_MAX)
+		if (errno == ERANGE || val <= 0 || val > INT_MAX)
 			throw std::runtime_error("Error");
 		_vec.push_back(static_cast<int>(val));
 	}
