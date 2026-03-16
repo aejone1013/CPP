@@ -195,7 +195,13 @@ void ScalarConverter::convert(const std::string& literal) {
         long long temp = std::atoll(literal.c_str());
         if (temp < std::numeric_limits<int>::min() || 
             temp > std::numeric_limits<int>::max()) {
-            printImpossible();
+            errno = 0;
+            double d = std::strtod(literal.c_str(), NULL);
+            if (errno == ERANGE) {
+                printImpossible();
+                return;
+            }
+            convertFromDouble(d);
             return;
         }
         convertFromInt(static_cast<int>(temp));
