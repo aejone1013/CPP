@@ -15,6 +15,8 @@
 #include <cstdlib>
 #include <stack>
 #include <cctype>
+#include <sstream>
+#include <climits>
 
 RPN::RPN() {}
 
@@ -36,32 +38,47 @@ bool RPN::isDigit(char c) const {
 }
 
 int RPN::performOperation(int a, int b, char op) const {
+    long result;
+
     switch (op) {
         case '+':
-            return a + b;
+            result = static_cast<long>(a) + static_cast<long>(b);
+            break;
         case '-':
-            return a - b;
+            result = static_cast<long>(a) - static_cast<long>(b);
+            break;
         case '*':
-            return a * b;
+            result = static_cast<long>(a) * static_cast<long>(b);
+            break;
         case '/':
             if (b == 0)
+                throw std::runtime_error("Error");
+            if (a == INT_MIN && b == -1)
                 throw std::runtime_error("Error");
             return a / b;
         default:
             throw std::runtime_error("Error");
     }
+
+    if (result < INT_MIN || result > INT_MAX)
+        throw std::runtime_error("Error");
+    return static_cast<int>(result);
 }
 
 int RPN::calculate(const std::string& expression) {
     std::stack<int> stack;
+    std::istringstream iss(expression);
+    std::string token;
 
-    for (size_t i = 0; i < expression.length(); i++) {
-        char c = expression[i];
-        if (std::isspace(static_cast<unsigned char>(c)))
-            continue;
+    while (iss >> token) {
+        if (token.length() != 1)
+            throw std::runtime_error("Error");
+
+        char c = token[0];
         if (isDigit(c)) {
             stack.push(c - '0');
-        } else if (isOperator(c)) {
+        }
+        else if (isOperator(c)) {
             if (stack.size() < 2)
                 throw std::runtime_error("Error");
             int b = stack.top();
@@ -69,7 +86,8 @@ int RPN::calculate(const std::string& expression) {
             int a = stack.top();
             stack.pop();
             stack.push(performOperation(a, b, c));
-        } else {
+        }
+        else {
             throw std::runtime_error("Error");
         }
     }
