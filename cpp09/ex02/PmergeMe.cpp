@@ -290,32 +290,36 @@ void PmergeMe::sortDeque(std::deque<int>& d) {
 }
 
 void PmergeMe::run(int argc, char** argv) {
-	parseInput(argc, argv);
+    parseInput(argc, argv);
+    std::cout << "Before:";
+    for (size_t i = 0; i < _vec.size(); i++)
+        std::cout << " " << _vec[i];
+    std::cout << std::endl;
 
-	std::cout << "Before:";
-	for (size_t i = 0; i < _vec.size(); i++)
-		std::cout << " " << _vec[i];
-	std::cout << std::endl;
+    _vec.clear();
+    clock_t startVec = clock();
+    parseInput(argc, argv);
+    std::vector<int> vecCopy(_vec);
+    sortVector(vecCopy);
+    clock_t endVec = clock();
 
-	std::vector<int> vecCopy(_vec);
-	clock_t startVec = clock();
-	sortVector(vecCopy);
-	clock_t endVec = clock();
-	double timeVec = static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC * 1000000;
+    _vec.clear();
+    clock_t startDeq = clock();
+    parseInput(argc, argv);
+    std::deque<int> deqCopy(_vec.begin(), _vec.end());
+    sortDeque(deqCopy);
+    clock_t endDeq = clock();
 
-	std::deque<int> deqCopy(_vec.begin(), _vec.end());
-	clock_t startDeq = clock();
-	sortDeque(deqCopy);
-	clock_t endDeq = clock();
-	double timeDeq = static_cast<double>(endDeq - startDeq) / CLOCKS_PER_SEC * 1000000;
+    double timeVec = static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC * 1000000;
+    double timeDeq = static_cast<double>(endDeq - startDeq) / CLOCKS_PER_SEC * 1000000;
 
-	std::cout << "After:";
-	for (size_t i = 0; i < vecCopy.size(); i++)
-		std::cout << " " << vecCopy[i];
-	std::cout << std::endl;
+    std::cout << "After:";
+    for (size_t i = 0; i < vecCopy.size(); i++)
+        std::cout << " " << vecCopy[i];
+    std::cout << std::endl;
 
-	std::cout << "Time to process a range of " << vecCopy.size()
-			  << " elements with std::vector : " << timeVec << " us" << std::endl;
-	std::cout << "Time to process a range of " << deqCopy.size()
-			  << " elements with std::deque  : " << timeDeq << " us" << std::endl;
+    std::cout << "Time to process a range of " << vecCopy.size()
+              << " elements with std::vector : " << timeVec << " us" << std::endl;
+    std::cout << "Time to process a range of " << deqCopy.size()
+              << " elements with std::deque  : " << timeDeq << " us" << std::endl;
 }
