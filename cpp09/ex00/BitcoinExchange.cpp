@@ -6,7 +6,7 @@
 /*   By: jaoh <jaoh@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:55:47 by jaoh              #+#    #+#             */
-/*   Updated: 2025/10/08 16:05:18 by jaoh             ###   ########.fr       */
+/*   Updated: 2026/04/26 13:51:37 by jaoh             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <cstdlib>
 #include <cctype>
 
 namespace {
@@ -28,9 +27,8 @@ BitcoinExchange::BitcoinExchange() {}
 BitcoinExchange::BitcoinExchange(BitcoinExchange const & other) : _database(other._database) {}
 
 BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const & other) {
-    if (this != &other) {
+    if (this != &other)
         _database = other._database;
-    }
     return *this;
 }
 
@@ -42,10 +40,8 @@ std::string BitcoinExchange::trim(const std::string& str) const {
     
     while (start < end && std::isspace(str[start]))
         start++;
-    
     while (end > start && std::isspace(str[end - 1]))
         end--;
-    
     return str.substr(start, end - start);
 }
 
@@ -54,10 +50,8 @@ double BitcoinExchange::stringToDouble(const std::string& str) const {
     double value;
     iss >> value;
     
-    if (iss.fail() || !iss.eof()) {
+    if (iss.fail() || !iss.eof())
         throw std::runtime_error("Invalid number format");
-    }
-    
     return value;
 }
 
@@ -72,8 +66,7 @@ bool BitcoinExchange::isValidDate(const std::string& date) const {
         if (!std::isdigit(static_cast<unsigned char>(date[i])))
             return false;
     }
-    int year  = (date[0]-'0')*1000 + (date[1]-'0')*100
-              + (date[2]-'0')*10  + (date[3]-'0');
+    int year  = (date[0]-'0')*1000 + (date[1]-'0')*100 + (date[2]-'0')*10  + (date[3]-'0');
     int month = (date[5]-'0')*10 + (date[6]-'0');
     int day   = (date[8]-'0')*10 + (date[9]-'0');
     if (year < 1000 || year > 9999)
@@ -106,14 +99,11 @@ bool BitcoinExchange::isValidValue(double value) const {
 void BitcoinExchange::loadDatabase(const std::string& filename) {
     std::ifstream file(filename.c_str());
     
-    if (!file.is_open()) {
+    if (!file.is_open())
         throw std::runtime_error("Error: could not open database file.");
-    }
-    
     std::string line;
-    if (!std::getline(file, line) || trim(line) != kDatabaseHeader) {
+    if (!std::getline(file, line) || trim(line) != kDatabaseHeader)
         throw std::runtime_error("Error: invalid database header.");
-    }
     
     while (std::getline(file, line)) {
         size_t pos = line.find(',');
@@ -207,6 +197,5 @@ void BitcoinExchange::processInputFile(const std::string& filename) {
             std::cerr << "Error: " << e.what() << std::endl;
         }
     }
-    
     file.close();
 }
